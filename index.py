@@ -65,7 +65,7 @@ class index(object):
                     pprint(message)
                     text = message["message"]["text"]
 
-                id, template, response = parent.handler(text, message["sender"]["id"])
+                id, template, response = parent.handler(text, message["sender"]["id"], 0)
                 
                 return push(message["sender"]["id"], template, text)
 
