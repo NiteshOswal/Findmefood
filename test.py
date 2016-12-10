@@ -54,7 +54,7 @@ def test():
                 print message["message"]
                 text = message["message"]["text"]
                 print message["sender"]["id"]
-            id, template, response = parent.handler(text, message["sender"]["id"])
+            id, template, response = parent.handler("Chinese", message["sender"]["id"], 0)
             print push(id, template, response)
 
 test()
