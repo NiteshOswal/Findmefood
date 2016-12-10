@@ -30,4 +30,4 @@ def get(id):
         user = conn.findOne("SELECT * FROM users WHERE users.id = %s" % (id))
         if user['interests']:
             user['interests'] = json.loads(user['interests'])
-        return user
+        return json.dumps(user)
