@@ -78,5 +78,5 @@ def get(id, as_json=False):
 
 def delete(id):
     with DB() as conn:
-        user = conn.update("TRUNCATE users;")
+        user = conn.update("DELETE FROM users WHERE id = %s" % id)
         return user
