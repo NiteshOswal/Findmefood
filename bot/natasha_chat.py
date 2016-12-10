@@ -43,15 +43,15 @@ pairs = (
     "I am not so sure about that, but i can help you find food if you tell me where you are.")),
 
   (r'What (.*)',
-  ( "I am a narrow AI, which brings like minded people together! :) ",
-    "I bring like minded people to have an amazing dining experience. :D ",
-    "I use my database to find people with similar taste in life for a great meal.")),
+  ( "I am a narrow AI, which brings like minded people together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "I bring like minded people to have an amazing dining experience. :D Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "I use my database to find people with similar taste in life for a great meal. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'Are you (.*)',
   ( "I am a narrow AI.",
-    "I bring like minded people to have an amazing dining experience.",
-    "I am what I am. Not what you think! Please ask open ended and minded questions.",
-    "I may be %1 -- may be not -- whatever you think doesn't matter! :P ")),
+    "I bring like minded people to have an amazing dining experience. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "I am what I am. Not what you think! Please ask open ended and minded questions. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "I may be %1 -- may be not -- whatever you think doesn't matter! :P Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'How (.*)',
   ( "How I do is of my business. Mind minding your own sweetheart? :P ",
@@ -84,9 +84,9 @@ pairs = (
   ( "You seem very certain.","What would you like to eat? where?")),
 
   (r'Can you(.*)',
-  ( "Hmmm... may be not. I can bring people with similar interests together! :) ",
-    "I can indeed find food near your locale; and some amazing people to hang out.",
-    "Find food, I can. Bring together I, like minded people. Yoda fan, I am.")),
+  ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'Can I (.*)',
   ( "You are a free person in a free country. Aren't you?. I can help you find like minded people for a meal though.",

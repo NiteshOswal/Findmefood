@@ -113,7 +113,7 @@ def handler(event, userid, context):
             'no','nothing', 'thanks', 'welcome', 'something', 'hey', 'am', 'me', 'need', 'bot', 'droid', 'ai', 'smart', 'super',\
             'moron', 'dumb', 'fuck', 'fucking', 'sex', 'indeed', 'sure', 'enough', 'man', 'show', 'showing', 'then', 'than',\
             'ok', 'okay', 'alright', 'cool', 'dude', 'lady', 'girl', 'else', 'other', 'any', 'anything', 'more', 'stuff', 'stop', \
-            'shit','things', 'yoga', 'yes', 'no', 'yep', 'sure' ,'b','m','p','d']
+            'shit','things', 'yoga', 'yes', 'no', 'yep', 'sure' ,'b','m','p','d', 'bachelor', 'master' ,'phd', 'md']
     #d1 = []
     bang = ''
     bump_last = ['.', ',', ';', ':', '(', ')', '?', '!']
@@ -179,7 +179,7 @@ def handler(event, userid, context):
     print 'b ', b
     #------------------------------ Other Entities ----------------------------#
     c = getWords(event.lower())
-    ed = ['b','m','p','d']
+    ed = ['b','m','p','d','bachelor', 'master' ,'phd', 'md']
     occ = ['Architect', 'Carpenter', 'Drafter', 'Electrician', 'Mechanic', 'Painter', 'Plumber', 'Rigger', 'Roofer', 'Surveyor',\
                   "Aircrew", "Officer", "Animal Control Worker", "Clerk", "Reporter", "Detective", "Inspector", "Firefighter", "Immigration", "Judge", "Lawyer", "Paralegal", "Police", "Detective", "Security", "Guard",\
                   'Aerospace', 'Engineer', 'Archeologist', 'Astronomer', 'Atmospheric', 'Science', 'Biologist', 'Cartographer', 'Chemical', 'Chemist', 'Civil', 'Manager', 'Environmental','Scientist', 'Forensic','Technician', 'Geographer', 'Industrial', 'Marine', 'Materials', 'Mechanical', 'Nuclear', 'Oceanographer', 'Physicist',\
@@ -189,7 +189,7 @@ def handler(event, userid, context):
     hobbies = []
     occupat = ''
     educ = ''
-    if event in ed:
+    if event.lower() in ed:
         educ = event
     print 'educ ', educ
     if educ != '':
