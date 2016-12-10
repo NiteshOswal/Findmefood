@@ -14,7 +14,7 @@ def init(id):
 
 def updateLoc(id, _lat, _long):
     with DB() as conn:
-        return conn.update("UPDATE users SET latitude = %s, longitude = %s WHERE users.id = %s" % (_lat, _long, id)) > 0
+        return conn.update("UPDATE users SET latitude = %s, longitude = %s, last_message = now() WHERE users.id = %s" % (_lat, _long, id)) > 0
 
 def updateParam(id, name, value):
     allowed = ["latitude", "longitude", "location", "first_name", "last_name", "gender", "profile_pic", "education", "occupation", "interests", "cuisine", "preferred_time"]
@@ -23,11 +23,20 @@ def updateParam(id, name, value):
     if name == "interests":
         value = json.dumps(name)
     with DB() as conn:
-        return conn.update("UPDATE users SET %s = '%s' WHERE users.id = %s" % (name, value, id)) > 0
+        return conn.update("UPDATE users SET %s = '%s', last_message = now() WHERE users.id = %s" % (name, value, id)) > 0
 
-def get(id):
+def update(query):
+    with DB() as conn:
+        return conn.update(query) > 0
+
+def updateUsuals(id, location, cuisine, message):
+    return update("UPDATE users SET location = '%s', cuisine = '%s', message = '%s' WHERE id = %s" % (location, cuisine, message, id))
+
+def get(id, as_json=False):
     with DB() as conn:
         user = conn.findOne("SELECT * FROM users WHERE users.id = %s" % (id))
         if user['interests']:
             user['interests'] = json.loads(user['interests'])
-        return json.dumps(user)
+        if as_json == True:
+            return json.dumps(user)
+        return user

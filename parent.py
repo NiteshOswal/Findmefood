@@ -16,6 +16,7 @@ from crf_location import crf_exec
 from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
 sys.path.insert(0, './bot')
+sys.path.insert(0, './models')
 from natasha_chat import eliza_chat
 
 #--------------------------------------------------------------------------#
@@ -46,45 +47,12 @@ def zipcode(event):
 # ---- JSON Database lib functions --- data.json
 #--------------------------------------------------------------------------#
 def oldner(event, userid):
-    with open('data.json', 'r') as f:
-         data = json.load(f)
-    flag = False
-    for i in data["people"]:
-        if i["userid"] == userid:
-            #i["count"] = i["count"] + 1
-            flag = True
-            with open('data.json', 'w') as f:
-                 json.dump(data, f)
-            return i
-    if flag == False:
-        killbill = {
-              "userid": userid,
-              "location":"",
-              "food":"",
-              "generated":"False",
-              "flag":"",
-              "count":0,
-              "text":"first time event"
-              }
-        data["people"].append(killbill)
-        with open('data.json', 'w') as f:
-             json.dump(data, f)
-        return killbill
+    user = profiles.get(userid)
+    user['food'] = user['cuisine']
+    return user
 
-    #print len(data['people'])
-    # Writing JSON data
 def updatejson(person):
-    with open('data.json', 'r') as f:
-         data = json.load(f)
-    for i in data['people']:
-        if i['userid'] == person['userid']:
-            i['location'] = person['location']
-            i['food'] = person['food']
-            i['text'] = person['text']
-            i['count'] = i['count'] + 1
-            break
-    with open('data.json', 'w') as f:
-         json.dump(data, f)
+    profiles.updateUsuals(person['userid'], person['location'], person['food'], person['text'])
 
 # -------------- Calling YELP API ---------------
 def api_callee(event, context):
