@@ -1,2 +1,4 @@
 .DS_Store
 *.pyc
+# don't want our secrets out there..
+.env
