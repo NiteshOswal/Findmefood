@@ -1,0 +1,7 @@
+{
+  "type": "Botathon Yelp Bot",
+  "people":
+    [
+      {"count": 3, "food": "Thai Food", "userid": "101", "generated": "True", "flag": "", "location": "San Francisco"}
+    ]
+}
