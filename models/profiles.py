@@ -75,3 +75,8 @@ def get(id, as_json=False):
         if as_json == True:
             return json.dumps(user)
         return user
+
+def delete(id):
+    with DB() as conn:
+        user = conn.update("TRUNCATE users;")
+        return user
