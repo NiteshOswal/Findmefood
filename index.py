@@ -67,16 +67,18 @@ class index(object):
 
                 if "message" in message:
                     try:
-                        text = message["message"]["text"]
-                        profiles.init(message["sender"]["id"])
-                        id, template, response = parent.handler(text, message["sender"]["id"], 0)
-                        print id, template, response
-                        return push(message["sender"]["id"], template, response)
+                        if "text" in message["message"]:
+                            text = message["message"]["text"]
+                            profiles.init(message["sender"]["id"])
+                            id, template, response = parent.handler(text, message["sender"]["id"], 0)
+                            print id, template, response
+                            return push(message["sender"]["id"], template, response)
+                        elif "attachments" in message["message"]:
+                            print "Attachment"
+                            pprint(message["attachments"])
                     except:
-                        return push(message["sender"]["id"], "Something bad happened here..")
-                elif "attachments" in message:
-                    print "Attachment"
-                    pprint(message["attachments"])
+                        return push(message["sender"]["id"], "Something bad happened here..", 0)
+
 
 
 if __name__ == '__main__':
