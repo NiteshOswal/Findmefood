@@ -3,7 +3,8 @@ import inflection
 postbacks = {
     "ML_LOCATION": "ML_LOCATION",
     "RR_IS_IT_GOOD": "RR_IS_IT_GOOD",
-    "RR_SHOW_MORE": "RR_SHOW_MORE"
+    "RR_SHOW_MORE": "RR_SHOW_MORE",
+    "OC_SELECT": "OC_SELECT"
 }
 
 # multiple locations
@@ -31,6 +32,21 @@ def LC(payload):
         "quick_replies": [{
             "content_type": "location"
         }]
+    }
+
+def OC(payload):
+    education = {'b': "Bachelors", 'm': "Masters", 'p': "Ph.D", 'd': 'Doctor'}
+    buttons = []
+    for key, val in occupations.iteritems():
+        print key, val
+        buttons.append({
+            "content_type": "text",
+            "title": val,
+            "payload": postbacks["OC_SELECT"]
+        })
+    return {
+        "text": payload,
+        "quick_replies": buttons
     }
 
 def RR(payload):
