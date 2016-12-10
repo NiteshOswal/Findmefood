@@ -3,15 +3,7 @@ import json
 
 urls = (
     "/hookmeup", "index",
-    "/.well-known/acme-challenge/(.+)", "hello"
 )
-
-class hello(object):
-
-    def GET(self, id):
-        # challenge accepted!
-        web.header("Content-Type", "text/plain")
-        return id
 
 class index(object):
     def __init__(self):
