@@ -245,12 +245,31 @@ def handler(event, userid, context):
             return userid, 'TX', 'Alright. Enjoy your meal! :) Type in your education to find other people in your area for a great meal.'
         return userid, 'TX', 'So, I think I know enough about you to curate a great eating experince tonight with other like minded people with education and interests. Would you like me to?'
     if a == '' and len(b) == 0:
-        if len(hobbies) > 0 and occupat:
-            return userid, 'TX', 'Thats some hobbies to have with such occupation! :P '
-        if len(hobbies) > 0:
-            return userid, 'TX', 'Cool hobbies you have. Good for you!'
-        if occupat:
-            return userid, 'TX', 'Love your occupation, wish I could do that! :P '
+        if person['location'] == '':
+            if len(hobbies) > 0 and occupat:
+                return userid, 'TX', 'Thats some hobbies to have with such occupation! :P Where do you feel like eating today?'
+            if len(hobbies) > 0:
+                return userid, 'TX', 'Cool hobbies you have. Good for you! Where do you feel like eating today?'
+            if occupat:
+                return userid, 'TX', 'Love your occupation, wish I could do that! :P Where do you feel like eating today?'
+            if educ:
+                if person['cuisine'] == '':
+                    return userid, 'TX', 'Your education has been noted! What & Where do you feel like eating today?'
+                else:
+                    return userid, 'TX', 'Your education has been noted!'
+        else:
+            if len(hobbies) > 0 and occupat:
+                return userid, 'TX', 'Thats some hobbies to have with such occupation! :P'
+            if len(hobbies) > 0:
+                return userid, 'TX', 'Cool hobbies you have. Good for you!'
+            if occupat:
+                return userid, 'TX', 'Love your occupation, wish I could do that! :P '
+            if educ:
+                if person['cuisine'] == '':
+                    return userid, 'TX', 'Your education has been noted! What do you feel like eating today?'
+                else:
+                    return userid, 'TX', 'Your education has been noted!'
+
     if len(b) == 1:
         person['location'] = b[0]
         updatejson(person)
