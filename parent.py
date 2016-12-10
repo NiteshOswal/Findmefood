@@ -188,11 +188,11 @@ def handler(event, userid, context):
     if event in ed:
         educ = event
     print 'educ ', educ
-    if educ:
+    if educ != '':
         profiles.updateParam(userid, 'education', educ)
-        if not person['occupation']:
+        if person['occupation'] == None or person['occupation'] == '':
             return userid, 'TX', 'Cool. What is your occupation?'
-        if len(person['interests']) == 0:
+        if person['interests'] == None or len(person['interests']) == 0:
             return userid, 'TX', 'Cool. What are your hobbies?'
     for each in c:
         if each.title() in occ:
@@ -223,7 +223,7 @@ def handler(event, userid, context):
     a = ''
     c = getWords(event)
     for c_cmall in c:
-        if c_cmall.lower() not in d1 and c_cmall.lower() not in bb and c_cmall.lower().title() not in hobbies and c_cmall.lower().title() != occupat:
+        if c_cmall.lower() not in d1 and c_cmall.lower() not in bb and c_cmall.lower().title() not in hobbies and c_cmall.lower().title() != occupat and c_cmall.lower() != educ:
             a = a + c_cmall + ' '
     print 'a ', a
     # occupat, hobbies, a, b
