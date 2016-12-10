@@ -10,6 +10,7 @@ class hello(object):
 
     def GET(self, id):
         # challenge accepted!
+        web.header("Content-Type", "text/plain")
         return id
 
 class index(object):
