@@ -202,7 +202,7 @@ def handler(event, userid, context):
     print 'occupat ', occupat
     if occupat:
         profiles.updateParam(userid, 'occupation', occupat)
-        if len(person['interests']) == 0:
+        if person['interests'] == None or len(person['interests']) == 0:
             return userid, 'TX', 'Nice. What are your hobbies?'
     print 'hobbies ', hobbies
     if len(hobbies) > 0:
