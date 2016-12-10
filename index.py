@@ -5,6 +5,7 @@ import requests
 import dotenv
 import logging
 import templates
+from pprint import pprint
 
 dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
@@ -33,7 +34,7 @@ def push(id, type, payload):
             "status": True,
             "response": json.loads(response.text)
         }
-    except Exception as e:
+    except Exception, e:
         return {
             "status": False,
             "response": str(e)
@@ -59,6 +60,7 @@ class index(object):
                 if "postback" in message:
                     text = json.dumps(message["postback"])
                 elif "message" in message:
+                    pprint(message)
                     text = message["message"]["text"]
                 return push(message["sender"]["id"], "TX", text)
 
