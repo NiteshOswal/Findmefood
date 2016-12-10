@@ -15,8 +15,9 @@ import yelp.errors
 from crf_location import crf_exec
 from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
-sys.path.insert(0, './bot')
-sys.path.insert(0, './models')
+sys.path.append('./bot')
+sys.path.append('./models')
+import profiles
 from natasha_chat import eliza_chat
 
 #--------------------------------------------------------------------------#
