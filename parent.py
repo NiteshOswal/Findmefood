@@ -112,7 +112,6 @@ def handler(event, userid, context):
     #print a
     potentiav = GeoText(a)
     b1 = potentiav.cities
-    print 'b1 ', b1
     #--------------------------------------------------------------------------#
     # --- Senna --- use CRF for NER
     #--------------------------------------------------------------------------#
@@ -143,22 +142,8 @@ def handler(event, userid, context):
             p_loc = ''
         i = i + 1
             #p_loc_ref = []
-    j=''
-    for i in data_ayrton:
-        j = j + i
-    j=j.replace(' ','')
-    k=''
-    for i in b1:
-        k = k + i
-    k=k.replace(' ','')
-    # append to Data_ayrton from GeoText
-    if j!=k:
-        data_ayrton = data_ayrton + b1
     print 'data_ayrton ', data_ayrton
-    j = ''
-    for i in data_ayrton:
-        j = j + i + ' '
-    b = j
+    print 'b1 ', b1
     print 'b ', b
 
 #handler("I am in bangalore, london, and lake forest, calif and having a good time", 104 ,0)
