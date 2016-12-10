@@ -135,13 +135,12 @@ def handler(event, userid, context):
     p_loc = ''
     p_loc_ref = []
     for atom in c:
-        if atom[2][-3:] == 'LOC' and atom[0] not in p_loc_ref:
-            p_loc = p_loc + atom[0] + ' '
+        if atom[2] == 'B-LOC' and atom[0] not in p_loc_ref:
             p_loc_ref.append(atom[0])
-            data_ayrton.append(p_loc)
-            p_loc = ''
-        i = i + 1
-            #p_loc_ref = []
+            data_ayrton.append(atom[0])
+            i = i + 1
+        if atom[2] == 'I-LOC' and atom[0] not in p_loc_ref:
+            data_ayrton[i-1] = data_ayrton[i-1] + atom[0]
     b = ''
     for each in data_ayrton:
         b = b + each
