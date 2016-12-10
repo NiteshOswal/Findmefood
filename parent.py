@@ -111,7 +111,7 @@ def handler(event, userid, context):
             'no','nothing', 'thanks', 'welcome', 'something', 'hey', 'am', 'me', 'need', 'bot', 'droid', 'ai', 'smart', 'super',\
             'moron', 'dumb', 'fuck', 'fucking', 'sex', 'indeed', 'sure', 'enough', 'man', 'show', 'showing', 'then', 'than',\
             'ok', 'okay', 'alright', 'cool', 'dude', 'lady', 'girl', 'else', 'other', 'any', 'anything', 'more', 'stuff', 'stop', \
-            'shit','things', 'yoga']
+            'shit','things', 'yoga', 'yes', 'no', 'yep', 'sure']
     #d1 = []
     bang = ''
     bump_last = ['.', ',', ';', ':', '(', ')', '?', '!']
@@ -206,9 +206,10 @@ def handler(event, userid, context):
     a = ''
     c = getWords(event)
     for c_cmall in c:
-        if c_cmall.lower() not in d1 and c_cmall.lower() not in bb:
+        if c_cmall.lower() not in d1 and c_cmall.lower() not in bb and c_cmall.lower().title() not in hobbies and c_cmall.lower().title() != occupat:
             a = a + c_cmall + ' '
     print 'a ', a
+    # occupat, hobbies, a, b
     if len(b) == 1:
         person['location'] = b[0]
         updatejson(person)
@@ -230,6 +231,12 @@ def handler(event, userid, context):
                 else:
                     return userid, 'RR', res
     if len(b) == 0:
+        if len(hobbies) > 0 and occupat:
+            return userid, 'TX', 'Thats some hobbies to have with such occupation! :P '
+        if len(hobbie) > 0:
+            return userid, 'TX', 'Cool hobbies you have. Good for you!'
+        if occupat:
+            return userid, 'TX', 'Love your occupation, wish I could do that! :P '
         if a != '':
 	    print person
             if person['location'] != '':
