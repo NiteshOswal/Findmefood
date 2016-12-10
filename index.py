@@ -55,6 +55,7 @@ class index(object):
         raw = web.data()
         if raw:
             payload = json.loads(raw)
+	pprint(payload["entry"][0])
         if "messaging" in payload["entry"][0]:
             for message in payload["entry"][0]["messaging"]:
 	        pprint(message)
