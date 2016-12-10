@@ -33,7 +33,7 @@ pairs = (
        "I guess I just told you.")),
 
      (r'b1a0',
-     ( "Told you the last time",
+     ( "lol?",
        "We just talked about this Pretty Human",
        "I am pretty sure I told you already",
        "I guess I just told you.")),

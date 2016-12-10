@@ -237,5 +237,5 @@ def handler(event, userid, context):
 
 
 #handler("I am in bangalore, london, and lake forest, calif and having a good time", 104 ,0)
-jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
-print handler(str(jdblove), sys.argv[2], 0)
+#jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
+#print handler(str(jdblove), sys.argv[2], 0)
