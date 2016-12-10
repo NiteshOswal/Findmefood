@@ -35,6 +35,8 @@ def updateParam(id, name, value):
     allowed = ["latitude", "longitude", "location", "first_name", "last_name", "gender", "profile_pic", "education", "occupation", "interests", "cuisine", "preferred_time"]
     if name not in allowed:
         return False
+    if value is None:
+        value = ""
     if name == "interests":
         if not value:
             value = []
@@ -47,6 +49,12 @@ def update(query):
         return conn.update(query) > 0
 
 def updateUsuals(id, location, cuisine, message):
+    if location is None or location == "None":
+        location = ""
+    if cuisine is None or cuisine == "None":
+        cuisine = ""
+    if message is None or message == "None":
+        message = ""
     return update("UPDATE users SET location = '%s', cuisine = '%s', message = '%s' WHERE id = %s" % (location, cuisine, message, id))
 
 def get(id, as_json=False):
