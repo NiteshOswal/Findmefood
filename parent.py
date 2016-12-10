@@ -207,6 +207,20 @@ def handler(event, userid, context):
     print 'data_ayrton ', data_ayrton
     print 'b1 ', b1
     print 'b ', b
+    #------------------------------ Other Entities ----------------------------#
+    c = getWords(event.lower())
+    occ = ['Architect', 'Carpenter', 'Drafter', 'Electrician', 'Mechanic', 'Painter', 'Plumber', 'Rigger', 'Roofer', 'Surveyor',\
+                  "Aircrew Officer", "Animal Control Worker", "Court Clerk", "Court Reporter", "Detective", "Fire Inspector", "Firefighter", "Immigration and Custom Inspector", "Judge", "Lawyer", "Paralegal", "Police Officer", "Private Detective", "Security Guard",\
+                  'Aerospace Engineer', 'Archeologist', 'Astronomer', 'Atmospheric Scientist List of Science Careers', 'List of Science Careers', 'Biologist', 'Cartographer', 'Chemical Engineer', 'Chemist', 'Civil Engineer', 'Engineering Manager', 'Environmental Scientist', 'Forensic Technician', 'Geographer', 'Industrial Engineer', 'Marine Engineer', 'Materials Engineer', 'Mechanical Engineer', 'Nuclear Engineer', 'Oceanographer', 'Physicist',\
+                  'Anesthesiologist', 'Athletic Trainer', 'Chiropractor', 'Dental Assistants and Hygienists Listing of Medical Occupations', 'Listing of Medical Occupations', 'Dentist', 'Dietitians and Nutritionists', 'Doctor', 'Emergency Medical Technician', 'Licensed Practical Nurse', 'Massage Therapist', 'Medical and Health Services Manager', 'Medical Assistant', 'Medical Records Technician', 'Occupational Therapist', 'Optometrist', 'Orthodontist', 'Pharmacist', 'Pharmacy Technician', 'Physical Therapist', 'Physician Assistant', 'Podiatrist', 'Psychiatrist', 'Radiologic Technician', 'Recreational Therapist', 'Registered Nurse', 'Respiratory Therapist', 'Surgeon', 'Speech-Language Pathologist', 'Veterinarian', 'Veterinarian Assistant'
+                  ]
+    hbb = ['Reading', 'Tv', 'Family Time', 'Movies', 'Fishing', 'Computer', 'Gardening', 'Renting', 'Walking', 'Exercise', 'Listening', 'Entertaining', 'Hunting', 'Sports', 'Shopping', 'Traveling', 'Sleeping', 'Socializing', 'Sewing', 'Golf', 'Church', 'Relaxing', 'Playing', 'Housework', 'Crafts', 'Watching', 'Bicycling', 'Playing', 'Hiking', 'Cooking', 'Eating', 'Dating', 'Swimming', 'Camping', 'Skiing', 'Cars', 'Writing', 'Boating', 'Motorcycling', 'Animal', 'Bowling', 'Painting', 'Running', 'Dancing', 'Riding', 'Tennis', 'Theater', 'Billiards', 'Beach', 'Volunteer', 'Music', 'Cards']
+    hobbies = []
+    for each in c:
+        if c.title() in occ:
+            occupat = c.title()
+        if c.title() in hbb:
+            hobbies.append(c.title())
     #-------------------------------- RETURNS ---------------------------------#
     # return ML
     if len(b) > 1:
