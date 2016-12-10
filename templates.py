@@ -37,7 +37,7 @@ def LC(payload):
 def OC(payload):
     education = {'b': "Bachelors", 'm': "Masters", 'p': "Ph.D", 'd': 'Doctor'}
     buttons = []
-    for key, val in occupations.iteritems():
+    for key, val in education.iteritems():
         print key, val
         buttons.append({
             "content_type": "text",
