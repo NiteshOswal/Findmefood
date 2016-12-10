@@ -5,6 +5,7 @@ import requests
 import dotenv
 import logging
 import templates
+import parent
 from pprint import pprint
 
 dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
@@ -57,12 +58,16 @@ class index(object):
         if "messaging" in payload["entry"][0]:
             for message in payload["entry"][0]["messaging"]:
                 text = ""
+                template = "TX" # the default template..
                 if "postback" in message:
                     text = json.dumps(message["postback"])
                 elif "message" in message:
                     pprint(message)
                     text = message["message"]["text"]
-                return push(message["sender"]["id"], "TX", text)
+
+                id, template, response = parent.handler(text, message["sender"]["id"])
+                
+                return push(message["sender"]["id"], template, text)
 
         return push(message["sender"]["id"], "TX", "So something went wong there.. IYKWIM")
 
