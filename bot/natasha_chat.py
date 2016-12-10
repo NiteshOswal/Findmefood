@@ -38,25 +38,30 @@ pairs = (
        "I am pretty sure I told you already",
        "I guess I just told you.")),
 
-  (r'I need (.*)',
+  (r'I need(.*)',
   ( "Sure you may... But I can only help you find food. Mind telling me your city?",
     "I am not so sure about that, but i can help you find food if you tell me where you are.")),
 
+  (r'What (.*)',
+  ( "I am a narrow AI, which brings like minded people together! :) ",
+    "I bring like minded people to have an amazing dining experience. :D ",
+    "I use my databse to find people with similar taste in life for a great meal.",
+    "I may be %1 -- may be not -- whatever you think doesn't matter! :P ")),
 
   (r'Are you (.*)',
-  ( "I am a narrow AI. I am powered by tech developed at http://tonatasha.com",
-    "I use Yelp API to help you, I am just a tiny AI who is learning.",
-    "Perhaps you believe I am %1. I am good at only finding food.",
-    "I may be %1 -- whatever you think doesn't matter! :P Let me find some eating place for you.")),
+  ( "I am a narrow AI.",
+    "I bring like minded people to have an amazing dining experience.",
+    "I am what I am. Not what you think! Please ask open ended and minded questions.",
+    "I may be %1 -- may be not -- whatever you think doesn't matter! :P ")),
 
   (r'How (.*)',
-  ( "How I do is of my business. Mind minding your own sweetheart?",
-    "Perhaps you could answer your own questions love.",
-    "You better mind your own business.")),
+  ( "How I do is of my business. Mind minding your own sweetheart? :P ",
+    "Perhaps you could answer your own questions love. :) ",
+    "You better mind your own business. :P ")),
 
-  (r'Because (.*)',
+  (r'Because(.*)',
   ( "Maybe i don't care.",
-    "Sure, if you say so.",
+    "Sure, whatever, if you say so.",
     "You know you are talking to yourself right?")),
 
   (r'(.*) sorry (.*)',
@@ -80,44 +85,50 @@ pairs = (
   ( "You seem very certain.","What would you like to eat? where?")),
 
   (r'Can you(.*)',
-  ( "Well, I can find food in your city.",
-    "I can indeed find food near your locale.",
-    "Find food, I can. Yoda fan, I am.")),
+  ( "Hmmm... may be not. I can bring people with similar interests together! :) ",
+    "I can indeed find food near your locale; and some amazing people to hang out.",
+    "Find food, I can. Bring together I, like minded people. Yoda fan, I am.")),
 
   (r'Can I (.*)',
-  ( "You are a free person in a free country. Aren't you?. I can help you find food though.",
+  ( "You are a free person in a free country. Aren't you?. I can help you find like minded people for a meal though.",
   "I am good at finding food, so... ",
   "You know you are talking to yourself right?")),
 
   (r'You are (.*)',
-  ( "I am also supersmart. And a narcissist. ",
-    "You have strong opinions about me. ",
+  ( "I am also supersmart. And a narcissist. True story. -_- ",
+    "You have strong opinions about me. :P ",
     "How kind of you.",
-    "Your words, not mine.")),
+    "Your words, not mine!")),
 
   (r'Hello(.*)',
-  ( "Hello!!",
-    "Hiiii ",
-    "Hey there",
-    "Hello indeed")),
+  ( "Hello!! :D ",
+    "Hiiii :D ",
+    "Hey there :) ",
+    "Hello indeed :)")),
 
     (r'Hey(.*)',
-    ( "Hello!!",
-      "Hiiii ",
-      "Hey there",
-      "Hello indeed")),
+    ( "Hello!! :D ",
+      "Hiiii :D ",
+      "Hey there :) ",
+      "Hello indeed :)")),
 
     (r'Hi(.*)',
-    ( "Hello!! :)",
-      "Hiiii :) ",
-      "Hey there :)",
+    ( "Hello!! :D ",
+      "Hiiii :D ",
+      "Hey there :) ",
       "Hello indeed :)")),
 
      (r'(.*)Thank(.*)',
-     ( "You are welcome",
-       "Welcome you are ",
-       "Pleasure was mine",
-       "Loved helping you out")),
+     ( "You are welcome :) ",
+       "Welcome you are :P ",
+       "Pleasure was mine :D ",
+       "Loved helping you out :) ")),
+
+     (r'(.*)bye(.*)',
+     ( "Buh bye :) ",
+       "Bye... see you soon :P ",
+       "Hope to catch you later :D ",
+       "Loved helping you out. Bye! :) ")),
 
     (r'(.*)',
     ( "Cool!",
@@ -130,7 +141,7 @@ eliza_chatbot = Chat(pairs, reflections)
 
 def eliza_chat(incoming_message):
     if incoming_message == 'hello' or incoming_message == 'hi' or incoming_message == 'hey':
-        return random.choice(['Hello!! :)', 'Hiiii :) ', 'Hey there :) ', 'Hello indeed :) '])
+        return random.choice(['Hello!! :D', 'Hiiii :D ', 'Hey there :) ', 'Hello indeed :) '])
     return eliza_chatbot.converse3(incoming_message)
 
 def demo():
