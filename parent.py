@@ -234,15 +234,15 @@ def handler(event, userid, context):
     person = oldner(event, userid)
     if person['location'] != '' and person['cuisine'] != '' and person['interests'] != [] and person['occupation'] != '' and person['education'] != '':
         if event.find('yes') != -1:
-            profiles.updateParam(userid, 'location', '')
+            #profiles.updateParam(userid, 'location', '')
             profiles.updateParam(userid, 'cuisine', '')
-            profiles.updateParam(userid, 'occupation', '')
-            return userid, 'TX', 'Okay! here are your matches based on similarity between interests! Type your occupation, location, and choice of cuisine again to find new matches! :D '
+            profiles.updateParam(userid, 'education', '')
+            return userid, 'TX', 'Okay! here are your matches based on similarity between interests! Type your education, location, and choice of cuisine again to find new matches! :D '
         if event.find('no') != -1:
-            profiles.updateParam(userid, 'location', '')
+            #profiles.updateParam(userid, 'location', '')
             profiles.updateParam(userid, 'cuisine', '')
-            profiles.updateParam(userid, 'occupation', '')
-            return userid, 'TX', 'Alright. Enjoy your meal! :) Type in your occupation to find other people in your area for a great meal.'
+            profiles.updateParam(userid, 'education', '')
+            return userid, 'TX', 'Alright. Enjoy your meal! :) Type in your education to find other people in your area for a great meal.'
         return userid, 'TX', 'So, I think I know enough about you to curate a great eating experince tonight with other like minded people with education and interests. Would you like me to?'
     if a == '' and len(b) == 0:
         if len(hobbies) > 0 and occupat:
