@@ -210,6 +210,13 @@ def handler(event, userid, context):
             a = a + c_cmall + ' '
     print 'a ', a
     # occupat, hobbies, a, b
+    if a == '' and len(b) == 0:
+        if len(hobbies) > 0 and occupat:
+            return userid, 'TX', 'Thats some hobbies to have with such occupation! :P '
+        if len(hobbies) > 0:
+            return userid, 'TX', 'Cool hobbies you have. Good for you!'
+        if occupat:
+            return userid, 'TX', 'Love your occupation, wish I could do that! :P '
     if len(b) == 1:
         person['location'] = b[0]
         updatejson(person)
@@ -231,12 +238,6 @@ def handler(event, userid, context):
                 else:
                     return userid, 'RR', res
     if len(b) == 0:
-        if len(hobbies) > 0 and occupat:
-            return userid, 'TX', 'Thats some hobbies to have with such occupation! :P '
-        if len(hobbie) > 0:
-            return userid, 'TX', 'Cool hobbies you have. Good for you!'
-        if occupat:
-            return userid, 'TX', 'Love your occupation, wish I could do that! :P '
         if a != '':
             if person['location'] != '':
                 person['cuisine'] = a
