@@ -15,7 +15,9 @@ import yelp.errors
 from crf_location import crf_exec
 from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
-sys.path.insert(0, './bot')
+sys.path.append('./bot')
+sys.path.append('./models')
+import profiles
 from natasha_chat import eliza_chat
 
 #--------------------------------------------------------------------------#
@@ -46,45 +48,12 @@ def zipcode(event):
 # ---- JSON Database lib functions --- data.json
 #--------------------------------------------------------------------------#
 def oldner(event, userid):
-    with open('data.json', 'r') as f:
-         data = json.load(f)
-    flag = False
-    for i in data["people"]:
-        if i["userid"] == userid:
-            #i["count"] = i["count"] + 1
-            flag = True
-            with open('data.json', 'w') as f:
-                 json.dump(data, f)
-            return i
-    if flag == False:
-        killbill = {
-              "userid": userid,
-              "location":"",
-              "food":"",
-              "generated":"False",
-              "flag":"",
-              "count":0,
-              "text":"first time event"
-              }
-        data["people"].append(killbill)
-        with open('data.json', 'w') as f:
-             json.dump(data, f)
-        return killbill
+    user = profiles.get(userid)
+    user['food'] = user['cuisine']
+    return user
 
-    #print len(data['people'])
-    # Writing JSON data
 def updatejson(person):
-    with open('data.json', 'r') as f:
-         data = json.load(f)
-    for i in data['people']:
-        if i['userid'] == person['userid']:
-            i['location'] = person['location']
-            i['food'] = person['food']
-            i['text'] = person['text']
-            i['count'] = i['count'] + 1
-            break
-    with open('data.json', 'w') as f:
-         json.dump(data, f)
+    profiles.updateUsuals(person['userid'], person['location'], person['food'], person['text'])
 
 # -------------- Calling YELP API ---------------
 def api_callee(event, context):
@@ -207,6 +176,22 @@ def handler(event, userid, context):
     print 'data_ayrton ', data_ayrton
     print 'b1 ', b1
     print 'b ', b
+    #------------------------------ Other Entities ----------------------------#
+    c = getWords(event.lower())
+    occ = ['Architect', 'Carpenter', 'Drafter', 'Electrician', 'Mechanic', 'Painter', 'Plumber', 'Rigger', 'Roofer', 'Surveyor',\
+                  "Aircrew Officer", "Animal Control Worker", "Court Clerk", "Court Reporter", "Detective", "Fire Inspector", "Firefighter", "Immigration and Custom Inspector", "Judge", "Lawyer", "Paralegal", "Police Officer", "Private Detective", "Security Guard",\
+                  'Aerospace Engineer', 'Archeologist', 'Astronomer', 'Atmospheric Scientist List of Science Careers', 'List of Science Careers', 'Biologist', 'Cartographer', 'Chemical Engineer', 'Chemist', 'Civil Engineer', 'Engineering Manager', 'Environmental Scientist', 'Forensic Technician', 'Geographer', 'Industrial Engineer', 'Marine Engineer', 'Materials Engineer', 'Mechanical Engineer', 'Nuclear Engineer', 'Oceanographer', 'Physicist',\
+                  'Anesthesiologist', 'Athletic Trainer', 'Chiropractor', 'Dental Assistants and Hygienists Listing of Medical Occupations', 'Listing of Medical Occupations', 'Dentist', 'Dietitians and Nutritionists', 'Doctor', 'Emergency Medical Technician', 'Licensed Practical Nurse', 'Massage Therapist', 'Medical and Health Services Manager', 'Medical Assistant', 'Medical Records Technician', 'Occupational Therapist', 'Optometrist', 'Orthodontist', 'Pharmacist', 'Pharmacy Technician', 'Physical Therapist', 'Physician Assistant', 'Podiatrist', 'Psychiatrist', 'Radiologic Technician', 'Recreational Therapist', 'Registered Nurse', 'Respiratory Therapist', 'Surgeon', 'Speech-Language Pathologist', 'Veterinarian', 'Veterinarian Assistant'
+                  ]
+    hbb = ['Reading', 'Tv', 'Family Time', 'Movies', 'Fishing', 'Computer', 'Gardening', 'Renting', 'Walking', 'Exercise', 'Listening', 'Entertaining', 'Hunting', 'Sports', 'Shopping', 'Traveling', 'Sleeping', 'Socializing', 'Sewing', 'Golf', 'Church', 'Relaxing', 'Playing', 'Housework', 'Crafts', 'Watching', 'Bicycling', 'Playing', 'Hiking', 'Cooking', 'Eating', 'Dating', 'Swimming', 'Camping', 'Skiing', 'Cars', 'Writing', 'Boating', 'Motorcycling', 'Animal', 'Bowling', 'Painting', 'Running', 'Dancing', 'Riding', 'Tennis', 'Theater', 'Billiards', 'Beach', 'Volunteer', 'Music', 'Cards']
+    hobbies = []
+    for each in c:
+        if each.title() in occ:
+            occupat = each.title()
+        if each.title() in hbb:
+            hobbies.append(each.title())
+    print 'occupat ', occupat
+    print 'hobbies ', hobbies
     #-------------------------------- RETURNS ---------------------------------#
     # return ML
     if len(b) > 1:
@@ -266,3 +251,18 @@ def handler(event, userid, context):
 #handler("I am in bangalore, london, and lake forest, calif and having a good time", 104 ,0)
 #jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
 #print handler(str(jdblove), sys.argv[2], 0)
+def supertest():
+    m = ['hi', 'I am in london', 'looking for indian food', 'i love music and tv', 'i am an architect']
+    n = ['i am looking for thai food', 'in london', 'i am a doctor']
+    o = ['hi', 'who are you', 'what do you do?', 'okay bye']
+    p = ['you say yes, i say no, you say go, i say no no, you say goodbye, i say hello hello', 'fuck that shit', 'i love you']
+    for each in m:
+        print handler(each, 104, 0)
+    for each in n:
+        print handler(each, 108, 0)
+    for each in o:
+        print handler(each, 109, 0)
+    for each in p:
+        print handler(each, 109, 0)
+
+supertest()
