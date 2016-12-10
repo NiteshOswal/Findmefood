@@ -2,7 +2,8 @@ import inflection
 
 postbacks = {
     "ML_LOCATION": "ML_LOCATION",
-    "RR_IS_IT_GOOD": "RR_IS_IT_GOOD"
+    "RR_IS_IT_GOOD": "RR_IS_IT_GOOD",
+    "RR_SHOW_MORE": "RR_SHOW_MORE"
 }
 
 # multiple locations
@@ -25,7 +26,12 @@ def NF(payload):
 
 # for fetching the location
 def LC(payload):
-    return TX(payload)
+    return {
+        "text": payload,
+        "quick_replies": [{
+            "content_type": "location"
+        }]
+    }
 
 def RR(payload):
     elements = []
@@ -45,6 +51,17 @@ def RR(payload):
                     "type": "postback",
                     "title": "Is it good?",
                     "payload": postbacks["RR_IS_IT_GOOD"]
+                }
+            ]
+        })
+    if len(elements) > 0:
+        elements.append({
+            "title": "Show More",
+            "buttons": [
+                {
+                    "type": "postback",
+                    "title": "Show more?",
+                    payload: postbacks["RR_SHOW_MORE"]
                 }
             ]
         })

@@ -1,4 +1,5 @@
-import os
+import os, sys
+sys.path.append("./models")
 import web
 import json
 import requests
@@ -6,6 +7,7 @@ import dotenv
 import logging
 import templates
 import parent
+import profiles
 from pprint import pprint
 
 dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
@@ -56,20 +58,27 @@ class index(object):
         if raw:
             payload = json.loads(raw)
         print "Parsed Payload"
-        pprint(payload)
         if "messaging" in payload["entry"][0]:
             for message in payload["entry"][0]["messaging"]:
                 text = ""
                 template = "TX" # the default template..
-                if "postback" in message:
-                    text = json.dumps(message["postback"])
-                elif "message" in message:
-                    pprint(message)
-                    text = message["message"]["text"]
-       		    print text
-                    id, template, response = parent.handler(text, message["sender"]["id"], 0)
-                    print id, template, response
-                    return push(message["sender"]["id"], template, response)
+                print "Message"
+                pprint(message)
+
+                if "message" in message:
+                    try:
+                        if "text" in message["message"]:
+                            text = message["message"]["text"]
+                            profiles.init(message["sender"]["id"])
+                            id, template, response = parent.handler(text, message["sender"]["id"], 0)
+                            print id, template, response
+                            return push(message["sender"]["id"], template, response)
+                        elif "attachments" in message["message"]:
+                            print "Attachment"
+                            pprint(message["attachments"])
+                    except:
+                        return push(message["sender"]["id"], "Something bad happened here..", 0)
+
 
 
 if __name__ == '__main__':
