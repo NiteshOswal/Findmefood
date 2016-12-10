@@ -52,7 +52,7 @@ def oldner(event, userid):
     return user
 
 def updatejson(person):
-    profiles.updateUsuals(person['userid'], person['location'], person['cuisine'], person['text'])
+    profiles.updateUsuals(person['userid'], person['location'], person['cuisine'], '')
 
 # -------------- Calling YELP API ---------------
 def api_callee(event, context):
@@ -231,6 +231,7 @@ def handler(event, userid, context):
                     return userid, 'RR', res
     if len(b) == 0:
         if a != '':
+	    print person
             if person['location'] != '':
                 person['cuisine'] = a
                 res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
@@ -252,7 +253,7 @@ def handler(event, userid, context):
 #jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
 #print handler(str(jdblove), sys.argv[2], 0)
 def supertest():
-    m = ['hi', 'I am in london', 'looking for indian cuisine', 'i love music and tv', 'i am an architect']
+    m = ['hi', 'I am in london', 'looking for thai food', 'i love music and tv', 'i am an architect']
     n = ['i am looking for thai cuisine', 'in london', 'i am a doctor']
     o = ['hi', 'who are you', 'what do you do?', 'okay bye']
     p = ['you say yes, i say no, you say go, i say no no, you say goodbye, i say hello hello', 'fuck that shit', 'i love you']
