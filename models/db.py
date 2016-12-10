@@ -21,11 +21,13 @@ class DB(object):
 
     def find(self, query):
         cur = self._conn.cursor(mysql.cursors.DictCursor)
+        print query
         cur.execute(query)
         return cur.fetchall()
 
     def findOne(self, query):
         cur = self._conn.cursor(mysql.cursors.DictCursor)
+        print query
         cur.execute(query)
         return cur.fetchone()
 
@@ -37,6 +39,7 @@ class DB(object):
 
     def insert(self, query):
         cur = self._conn.cursor()
+        print query
         cur.execute(query)
         return cur.lastrowid
 

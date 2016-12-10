@@ -21,7 +21,9 @@ def updateParam(id, name, value):
     if name not in allowed:
         return False
     if name == "interests":
-        value = json.dumps(name)
+        if not value:
+            value = []
+        value = json.dumps(value)
     with DB() as conn:
         return conn.update("UPDATE users SET %s = '%s', last_message = now() WHERE users.id = %s" % (name, value, id)) > 0
 
@@ -35,7 +37,11 @@ def updateUsuals(id, location, cuisine, message):
 def get(id, as_json=False):
     with DB() as conn:
         user = conn.findOne("SELECT * FROM users WHERE users.id = %s" % (id))
-        if user['interests']:
+        if not user:
+            return False
+        if "interests" not in user:
+            user['interests'] = []
+        else:
             user['interests'] = json.loads(user['interests'])
         if as_json == True:
             return json.dumps(user)
