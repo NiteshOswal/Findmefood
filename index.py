@@ -2,7 +2,7 @@ import web
 import json
 
 urls = (
-    "/hookmeup", "index"
+    "/hookmeup", "index",
 )
 
 class index(object):
