@@ -4,6 +4,21 @@ import requests
 
 from db import DB
 
+default = {
+    "first_name": "",
+    "last_name": "",
+    "gender": "",
+    "location": "",
+    "profile_pic": "",
+    "latitude": "",
+    "longitude": "",
+    "education": "",
+    "occupation": "", 
+    "interests": "", 
+    "cuisine": "", 
+    "preferred_time": ""
+}
+
 def init(id):
     with DB() as conn:
         user = conn.findOne("SELECT * FROM users WHERE users.id = %s" % (id))
@@ -38,11 +53,17 @@ def get(id, as_json=False):
     with DB() as conn:
         user = conn.findOne("SELECT * FROM users WHERE users.id = %s" % (id))
         if not user:
-            return False
+            conn.insert("INSERT into users (id) VALUES (%s)" % (id))
+            _temp = default
+            _temp["id"] = id
+            _temp["userid"] = _temp["id"]
+            return _temp
         if "interests" not in user:
             user['interests'] = []
         else:
-            user['interests'] = json.loads(user['interests'])
+            if user['interests']:
+                user['interests'] = json.loads(user['interests'])
+        user['userid'] = user['id']
         if as_json == True:
             return json.dumps(user)
         return user
