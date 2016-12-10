@@ -85,9 +85,8 @@ def api_callee(event, context):
 def handler(event, userid, context):
     person = oldner(event, userid)
     if event.lower() == 'draw me like one of your french girls':
-        person['location'] = ''
-        person['cuisine'] = ''
-        updatejson(person)
+        profiles.delete(userid)
+        profiles.init(userid)
         return userid, 'TX', 'Start fresh you virgin...'
     if event.lower() == 'show my element':
         return userid, 'TX', str(person)
