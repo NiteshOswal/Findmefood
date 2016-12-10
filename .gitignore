@@ -3,3 +3,4 @@
 # don't want our secrets out there..
 .env
 config_secret.json
+#vectors.bin

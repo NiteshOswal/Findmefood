@@ -37,14 +37,14 @@ def RR(payload):
     elements = []
     for element in payload:
         elements.append({
-            "title": element["name"],
-            "item_url": element["mobile_url"],
-            "image_url": element["image_url"],
-            "subtitle": element["snippet_text"],
+            "title": element.name,
+            "item_url": element.mobile_url,
+            "image_url": element.image_url,
+            "subtitle": element.snippet_text,
             "buttons": [
                 {
                     "type": "web_url",
-                    "url": element["mobile_url"],
+                    "url": element.mobile_url,
                     "title": "Check it out!"
                 },
                 {
