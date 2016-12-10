@@ -146,7 +146,7 @@ def handler(event, userid, context):
     for each in data_ayrton:
         b = b + each
     for each in b1:
-        if b.find(b1) == -1:
+        if b.find(each) == -1:
             b = b + each + ' '
     print 'data_ayrton ', data_ayrton
     print 'b1 ', b1
