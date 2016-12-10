@@ -90,12 +90,12 @@ def handler(event, userid, context):
     bump_last = ['.', ',', ';', ':', '(', ')', '?', '!']
     for c_cmall in lust:
         if c_cmall[-1] not in bump_last:
-            if c_cmall not in d1:
+            if c_cmall not in d1 or c_cmall == 'new':
                 bang = bang + c_cmall.title() + ' '
             else:
                 bang = bang + c_cmall + ' '
         else:
-            if c_cmall not in d1:
+            if c_cmall not in d1 or c_cmall == 'new':
                 bang = bang + c_cmall[:-1].title() + ' ' + c_cmall[-1] + ' '
             else:
                 bang = bang + c_cmall[:-1] + ' ' + c_cmall[-1] + ' '

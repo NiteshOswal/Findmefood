@@ -72,7 +72,7 @@ def crf_exec(event, context):
     #output = subprocess.check_output('senna <<< "'  + event + '"', shell=True)
     #except CalledProcessError as e:
     #    output = e.output
-    pipeline = Senna.Senna('../ayrton/', ['pos', 'chk', 'ner'])
+    pipeline = Senna.Senna('../lib/ayrton/', ['pos', 'chk', 'ner'])
     sent = event.split()
     output = [(token['word'], token['chk'], token['ner'], token['pos']) for token in pipeline.tag(sent)]
     #print output
