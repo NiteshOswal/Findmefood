@@ -253,7 +253,16 @@ def handler(event, userid, context):
 #print handler(str(jdblove), sys.argv[2], 0)
 def supertest():
     m = ['hi', 'I am in london', 'looking for indian food', 'i love music and tv', 'i am an architect']
+    n = ['i am looking for thai food', 'in london', 'i am a doctor']
+    o = ['hi', 'who are you', 'what do you do?', 'okay bye']
+    p = ['you say yes, i say no, you say go, i say no no, you say goodbye, i say hello hello', 'fuck that shit', 'i love you']
     for each in m:
         print handler(each, 104, 0)
+    for each in n:
+        print handler(each, 108, 0)
+    for each in o:
+        print handler(each, 109, 0)
+    for each in p:
+        print handler(each, 109, 0)
 
 supertest()
