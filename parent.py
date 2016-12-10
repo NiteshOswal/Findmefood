@@ -111,7 +111,7 @@ def handler(event, userid, context):
             'no','nothing', 'thanks', 'welcome', 'something', 'hey', 'am', 'me', 'need', 'bot', 'droid', 'ai', 'smart', 'super',\
             'moron', 'dumb', 'fuck', 'fucking', 'sex', 'indeed', 'sure', 'enough', 'man', 'show', 'showing', 'then', 'than',\
             'ok', 'okay', 'alright', 'cool', 'dude', 'lady', 'girl', 'else', 'other', 'any', 'anything', 'more', 'stuff', 'stop', \
-            'shit','things', 'yoga']
+            'shit','things', 'yoga', 'yes', 'no', 'yep', 'sure']
     #d1 = []
     bang = ''
     bump_last = ['.', ',', ';', ':', '(', ')', '?', '!']
