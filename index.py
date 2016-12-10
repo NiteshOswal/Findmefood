@@ -19,12 +19,14 @@ urls = (
 def push(id, type, payload):
     # just to be sure
     try:
+        message = getattr(globals()['templates'], type)(payload)
+        pprint(message)
         response = requests.post("https://graph.facebook.com/v2.6/me/messages", 
             data=json.dumps({
                 "recipient": {
                     "id": id
                 },
-                "message": getattr(globals()['templates'], type)(payload)
+                "message": message
             }),
             params={
                 "access_token": os.environ.get("PAGE_ACCESS_TOKEN")
