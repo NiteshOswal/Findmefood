@@ -228,7 +228,7 @@ def handler(event, userid, context):
     print 'a ', a
     # occupat, hobbies, a, b
     person = oldner(event, userid)
-    if person['location'] and person['cuisine'] and person['interests'] and person['occupation'] and person['education']:
+    if person['location'] != '' and person['cuisine'] != '' and person['interests'] != [] and person['occupation'] != '' and person['education'] != '':
         return userid, 'TX', 'So, I think I know enough about you to curate a great eating experince tonight with other like minded people with education and interests. Would you like me to?'
     if a == '' and len(b) == 0:
         if len(hobbies) > 0 and occupat:
@@ -243,7 +243,7 @@ def handler(event, userid, context):
         if a != '':
             person['cuisine'] = a
             res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
-            person['cuisine'] = ''
+            #person['cuisine'] = ''
             updatejson(person)
             return userid, 'RR', res
         else:
@@ -251,7 +251,7 @@ def handler(event, userid, context):
                 return userid, 'TX', 'In beautiful ' + person['location'] + ', what you may want to eat?'
             else:
                 res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
-                person['cuisine'] = ''
+                #person['cuisine'] = ''
                 updatejson(person)
                 if type(res) == type('Hello'):
                     return userid, 'TX', res
@@ -263,7 +263,7 @@ def handler(event, userid, context):
             if person['location'] != '':
                 person['cuisine'] = a
                 res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
-                person['cuisine'] = ''
+                #person['cuisine'] = ''
                 updatejson(person)
                 if type(res) == type('Hello'):
                     return userid, 'TX', res
