@@ -79,6 +79,7 @@ def updatejson(person):
     for i in data['people']:
         if i['userid'] == person['userid']:
             i['location'] = person['location']
+            i['food'] = person['food']
             i['text'] = person['text']
             i['count'] = i['count'] + 1
             break
