@@ -54,17 +54,6 @@ def RR(payload):
                 }
             ]
         })
-    if len(elements) > 0:
-        elements.append({
-            "title": "Show More",
-            "buttons": [
-                {
-                    "type": "postback",
-                    "title": "Show more?",
-                    payload: postbacks["RR_SHOW_MORE"]
-                }
-            ]
-        })
     return {
         "attachment": {
             "type": "template",
