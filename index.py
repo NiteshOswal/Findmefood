@@ -55,8 +55,10 @@ class index(object):
         raw = web.data()
         if raw:
             payload = json.loads(raw)
+	pprint(payload["entry"][0])
         if "messaging" in payload["entry"][0]:
             for message in payload["entry"][0]["messaging"]:
+	        pprint(message)
                 text = ""
                 template = "TX" # the default template..
                 if "postback" in message:
@@ -64,12 +66,13 @@ class index(object):
                 elif "message" in message:
                     pprint(message)
                     text = message["message"]["text"]
+       		    print text
+		    pprint(message)
+                    id, template, response = parent.handler(text, message["sender"]["id"], 0)
+                    print id, template, response
+                    return push(message["sender"]["id"], template, response)
 
-                id, template, response = parent.handler(text, message["sender"]["id"], 0)
-                
-                return push(message["sender"]["id"], template, text)
-
-        return push(message["sender"]["id"], "TX", "So something went wong there.. IYKWIM")
+#        return push(message["sender"]["id"], "TX", "So something went wong there.. IYKWIM")
 
 if __name__ == '__main__':
     app = web.application(urls, globals())
