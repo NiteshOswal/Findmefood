@@ -11,7 +11,7 @@ class index(object):
 
     def GET(self):
         web.header("Content-Type", "application/json")
-        web. json.dumps({
+        return json.dumps({
             "status": True
         })
 
