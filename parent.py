@@ -85,8 +85,12 @@ def api_callee(event, context):
 def handler(event, userid, context):
     person = oldner(event, userid)
     if event.lower() == 'draw me like one of your french girls':
-        profiles.delete(userid)
-        return userid, 'TX', 'Start fresh you virgin...'
+        profiles.updateParam(userid, 'education', '')
+        profiles.updateParam(userid, 'occupation', '')
+        profiles.updateParam(userid, 'interests', [])
+        profiles.updateParam(userid, 'location', '')
+        profiles.updateParam(userid, 'cuisine', '')
+        return userid, 'TX', 'Start afresh you virgin...'
     if event.lower() == 'show my element':
         return userid, 'TX', str(person)
     print 'person ', person
@@ -229,6 +233,16 @@ def handler(event, userid, context):
     # occupat, hobbies, a, b
     person = oldner(event, userid)
     if person['location'] != '' and person['cuisine'] != '' and person['interests'] != [] and person['occupation'] != '' and person['education'] != '':
+        if event.find('yes') != -1:
+            profiles.updateParam(userid, 'location', '')
+            profiles.updateParam(userid, 'cuisine', '')
+            profiles.updateParam(userid, 'occupation', '')
+            return userid, 'TX', 'Okay! here are your matches based on similarity between interests! Type your occupation, location, and choice of cuisine again to find new matches! :D '
+        if event.find('no') != -1:
+            profiles.updateParam(userid, 'location', '')
+            profiles.updateParam(userid, 'cuisine', '')
+            profiles.updateParam(userid, 'occupation', '')
+            return userid, 'TX', 'Alright. Enjoy your meal! :) Type in your occupation to find other people in your area for a great meal.'
         return userid, 'TX', 'So, I think I know enough about you to curate a great eating experince tonight with other like minded people with education and interests. Would you like me to?'
     if a == '' and len(b) == 0:
         if len(hobbies) > 0 and occupat:
