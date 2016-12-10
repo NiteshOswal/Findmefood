@@ -52,7 +52,7 @@ def oldner(event, userid):
     return user
 
 def updatejson(person):
-    profiles.updateUsuals(person['userid'], person['location'], person['cuisine'], '')
+    profiles.updateUsuals(person['userid'], person['location'], person['cuisine'], "")
 
 # -------------- Calling YELP API ---------------
 def api_callee(event, context):
@@ -85,9 +85,7 @@ def api_callee(event, context):
 def handler(event, userid, context):
     person = oldner(event, userid)
     if event.lower() == 'draw me like one of your french girls':
-        person['location'] = ''
-        person['cuisine'] = ''
-        updatejson(person)
+        profiles.delete(userid)
         return userid, 'TX', 'Start fresh you virgin...'
     if event.lower() == 'show my element':
         return userid, 'TX', str(person)
@@ -194,7 +192,11 @@ def handler(event, userid, context):
         if each.title() in hbb:
             hobbies.append(each.title())
     print 'occupat ', occupat
+    if occupat:
+        profiles.updateParam(userid, 'occupation', occupat)
     print 'hobbies ', hobbies
+    if len(hobbies) > 0:
+        profiles.updateParam(userid, 'interests', hobbies)
     #-------------------------------- RETURNS ---------------------------------#
     # return ML
     if len(b) > 1:
