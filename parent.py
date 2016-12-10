@@ -27,6 +27,16 @@ def getWords(data):
 def getWords_special_location(data):
     return re.compile(r"[\w'/.,-@]+").findall(data)
 
+def flex(event):
+    g = ''
+    words = getWords_special_location(event)
+    for each in words:
+        if each.lower() == "i'm":
+            g = g + 'i am' + ' '
+        else:
+            g = g + each + ' '
+    return g[:-1]
+
 #--------------------------------------------------------------------------#
 # ---- JSON Database lib functions --- data.json
 #--------------------------------------------------------------------------#
@@ -101,6 +111,7 @@ def api_callee(event, context):
 def handler(event, userid, context):
     person = oldner(event, userid)
     print 'person ', person
+    event = flex(event)
     c = getWords(event)
     lust = getWords_special_location(event)
     d1 = ['i', 'live', 'in', 'please', 'hi', 'give', 'find', 'who', 'what', 'my', 'hungry', 'near', 'me', 'thank', 'you', \
