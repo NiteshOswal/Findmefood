@@ -37,6 +37,11 @@ def flex(event):
             g = g + each + ' '
     return g[:-1]
 
+def zipcode(event):
+    return re.compile(r"^\d{5}(?:[-\s]\d{4})?$").findall(event)
+
+#print zipcode('hello')
+
 #--------------------------------------------------------------------------#
 # ---- JSON Database lib functions --- data.json
 #--------------------------------------------------------------------------#
@@ -231,10 +236,8 @@ def handler(event, userid, context):
                 else:
                     return userid, 'RR', res
     if len(b) == 0:
-        if person['location'] == '':
-            return userid, 'TX', eliza_chat(event)
-        else:
-            if a != '':
+        if a != '':
+            if person['location'] != '':
                 person['food'] = a
                 res = api_callee({ 'item': person['food'], 'location': person['location']}, 0)
                 person['food'] = ''
@@ -244,7 +247,11 @@ def handler(event, userid, context):
                 else:
                     return userid, 'RR', res
             else:
-                return userid, 'TX', eliza_chat(event)
+                person['food'] = a
+                updatejson(person)
+                return userid, 'TX', 'Hmmm... Where are you looking for food?'
+        else:
+            return userid, 'TX', eliza_chat(event)
 
 
 #handler("I am in bangalore, london, and lake forest, calif and having a good time", 104 ,0)
