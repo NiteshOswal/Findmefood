@@ -109,7 +109,7 @@ def handler(event, userid, context):
             'no','nothing', 'thanks', 'welcome', 'something', 'hey', 'am', 'me', 'need', 'bot', 'droid', 'ai', 'smart', 'super',\
             'moron', 'dumb', 'fuck', 'fucking', 'sex', 'indeed', 'sure', 'enough', 'man', 'show', 'showing', 'then', 'than',\
             'ok', 'okay', 'alright', 'cool', 'dude', 'lady', 'girl', 'else', 'other', 'any', 'anything', 'more', 'stuff', 'stop', \
-            'shit','things', 'yoga', 'yes', 'no', 'yep', 'sure']
+            'shit','things', 'yoga', 'yes', 'no', 'yep', 'sure' ,'b','m','p','d']
     #d1 = []
     bang = ''
     bump_last = ['.', ',', ';', ':', '(', ')', '?', '!']
@@ -177,15 +177,23 @@ def handler(event, userid, context):
     c = getWords(event.lower())
     ed = ['b','m','p','d']
     occ = ['Architect', 'Carpenter', 'Drafter', 'Electrician', 'Mechanic', 'Painter', 'Plumber', 'Rigger', 'Roofer', 'Surveyor',\
-                  "Aircrew Officer", "Animal Control Worker", "Court Clerk", "Court Reporter", "Detective", "Fire Inspector", "Firefighter", "Immigration and Custom Inspector", "Judge", "Lawyer", "Paralegal", "Police Officer", "Private Detective", "Security Guard",\
-                  'Aerospace Engineer', 'Archeologist', 'Astronomer', 'Atmospheric Scientist List of Science Careers', 'List of Science Careers', 'Biologist', 'Cartographer', 'Chemical Engineer', 'Chemist', 'Civil Engineer', 'Engineering Manager', 'Environmental Scientist', 'Forensic Technician', 'Geographer', 'Industrial Engineer', 'Marine Engineer', 'Materials Engineer', 'Mechanical Engineer', 'Nuclear Engineer', 'Oceanographer', 'Physicist',\
-                  'Anesthesiologist', 'Athletic Trainer', 'Chiropractor', 'Dental Assistants and Hygienists Listing of Medical Occupations', 'Listing of Medical Occupations', 'Dentist', 'Dietitians and Nutritionists', 'Doctor', 'Emergency Medical Technician', 'Licensed Practical Nurse', 'Massage Therapist', 'Medical and Health Services Manager', 'Medical Assistant', 'Medical Records Technician', 'Occupational Therapist', 'Optometrist', 'Orthodontist', 'Pharmacist', 'Pharmacy Technician', 'Physical Therapist', 'Physician Assistant', 'Podiatrist', 'Psychiatrist', 'Radiologic Technician', 'Recreational Therapist', 'Registered Nurse', 'Respiratory Therapist', 'Surgeon', 'Speech-Language Pathologist', 'Veterinarian', 'Veterinarian Assistant'
+                  "Aircrew", "Officer", "Animal Control Worker", "Clerk", "Reporter", "Detective", "Inspector", "Firefighter", "Immigration", "Judge", "Lawyer", "Paralegal", "Police", "Detective", "Security", "Guard",\
+                  'Aerospace', 'Engineer', 'Archeologist', 'Astronomer', 'Atmospheric', 'Science', 'Biologist', 'Cartographer', 'Chemical', 'Chemist', 'Civil', 'Manager', 'Environmental','Scientist', 'Forensic','Technician', 'Geographer', 'Industrial', 'Marine', 'Materials', 'Mechanical', 'Nuclear', 'Oceanographer', 'Physicist',\
+                  'Anesthesiologist', 'Athletic','Trainer', 'Chiropractor', 'Dental','Assistants and ','Hygienists','Listing of Medical Occupations', 'Listing of Medical Occupations', 'Dentist', 'Dietitians','Nutritionists', 'Doctor', 'Emergency','Technician', 'Nurse', 'Therapist', 'Manager', 'Assistant', 'Optometrist', 'Orthodontist', 'Pharmacist', 'Physical','Therapist', 'Physician','Podiatrist', 'Psychiatrist', 'Radiologic', 'Recreational', 'Nurse', 'Respiratory', 'Surgeon', 'Pathologist', 'Veterinarian',
                   ]
     hbb = ['Reading', 'Tv', 'Family Time', 'Movies', 'Fishing', 'Computer', 'Gardening', 'Renting', 'Walking', 'Exercise', 'Listening', 'Entertaining', 'Hunting', 'Sports', 'Shopping', 'Traveling', 'Sleeping', 'Socializing', 'Sewing', 'Golf', 'Church', 'Relaxing', 'Playing', 'Housework', 'Crafts', 'Watching', 'Bicycling', 'Playing', 'Hiking', 'Cooking', 'Eating', 'Dating', 'Swimming', 'Camping', 'Skiing', 'Cars', 'Writing', 'Boating', 'Motorcycling', 'Animal', 'Bowling', 'Painting', 'Running', 'Dancing', 'Riding', 'Tennis', 'Theater', 'Billiards', 'Beach', 'Volunteer', 'Music', 'Cards']
     hobbies = []
     occupat = ''
+    educ = ''
     if event in ed:
         educ = event
+    print 'educ ', educ
+    if educ:
+        profiles.updateParam(userid, 'education', educ)
+        if not person['occupation']:
+            return userid, 'TX', 'Cool. What is your occupation?'
+        if len(person['interests']) == 0:
+            return userid, 'TX', 'Cool. What are your hobbies?'
     for each in c:
         if each.title() in occ:
             occupat = each.title()
@@ -194,9 +202,13 @@ def handler(event, userid, context):
     print 'occupat ', occupat
     if occupat:
         profiles.updateParam(userid, 'occupation', occupat)
+        if len(person['interests']) == 0:
+            return userid, 'TX', 'Nice. What are your hobbies?'
     print 'hobbies ', hobbies
     if len(hobbies) > 0:
         profiles.updateParam(userid, 'interests', hobbies)
+        if not person['occupation']:
+            return userid, 'TX', 'Nice. What is your occupation?'
     #-------------------------------- RETURNS ---------------------------------#
     # return ML
     if len(b) > 1:
