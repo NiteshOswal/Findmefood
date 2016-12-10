@@ -9,7 +9,8 @@ urls = (
 class hello(object):
 
     def GET(self, id):
-        return "Challenge Accepted!"
+        # challenge accepted!
+        return id
 
 class index(object):
     def __init__(self):
