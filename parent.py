@@ -142,6 +142,12 @@ def handler(event, userid, context):
             p_loc = ''
         i = i + 1
             #p_loc_ref = []
+    b = ''
+    for each in data_ayrton:
+        b = b + each
+    for each in b1:
+        if b.find(b1) == -1:
+            b = b + each + ' '
     print 'data_ayrton ', data_ayrton
     print 'b1 ', b1
     print 'b ', b
