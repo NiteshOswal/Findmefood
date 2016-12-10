@@ -1,5 +1,6 @@
 import sys
 import re
+from geotext import GeoText
 from crf_location import crf_exec
 
 ##############################################################################
