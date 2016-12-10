@@ -70,6 +70,12 @@ class index(object):
                 if "message" in message:
                     try:
                         if "text" in message["message"]:
+                            if "quick_reply" in message["message"]:
+                                if "payload" in message["message"]["quick_reply"]:
+                                    if message["message"]["quick_reply"]["payload"] == "OC_SELECT":
+                                        education = {"Bachelors": 'b', "Masters": 'm', "Ph.D": 'p', "Doctor": 'd'}
+                                        if message["message"]["text"] in education:
+                                            message["message"]["text"] = education[message["message"]["text"]]
                             text = message["message"]["text"]
                             profiles.init(message["sender"]["id"])
                             id, template, response = parent.handler(text, message["sender"]["id"], 0)
