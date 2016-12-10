@@ -115,6 +115,13 @@ def api_callee(event, context):
 # ------------- main function -------------
 def handler(event, userid, context):
     person = oldner(event, userid)
+    if event.lower() == 'draw me like one of your french girls':
+        person['location'] = ''
+        person['food'] = ''
+        updatejson(person)
+        return userid, 'TX', 'Start fresh you virgin...'
+    if event.lower() == 'show my element':
+        return userid, 'TX', str(person)
     print 'person ', person
     event = flex(event)
     c = getWords(event)
