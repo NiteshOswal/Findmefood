@@ -45,8 +45,7 @@ pairs = (
   (r'What (.*)',
   ( "I am a narrow AI, which brings like minded people together! :) ",
     "I bring like minded people to have an amazing dining experience. :D ",
-    "I use my databse to find people with similar taste in life for a great meal.",
-    "I may be %1 -- may be not -- whatever you think doesn't matter! :P ")),
+    "I use my database to find people with similar taste in life for a great meal.")),
 
   (r'Are you (.*)',
   ( "I am a narrow AI.",
@@ -101,22 +100,22 @@ pairs = (
     "Your words, not mine!")),
 
   (r'Hello(.*)',
-  ( "Hello!! :D ",
-    "Hiiii :D ",
-    "Hey there :) ",
-    "Hello indeed :)")),
+  ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+    "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+    "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+    "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
 
     (r'Hey(.*)',
-    ( "Hello!! :D ",
-      "Hiiii :D ",
-      "Hey there :) ",
-      "Hello indeed :)")),
+    ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+      "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+      "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+      "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
 
     (r'Hi(.*)',
-    ( "Hello!! :D ",
-      "Hiiii :D ",
-      "Hey there :) ",
-      "Hello indeed :)")),
+    ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+      "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+      "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+      "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
 
      (r'(.*)Thank(.*)',
      ( "You are welcome :) ",
@@ -141,7 +140,7 @@ eliza_chatbot = Chat(pairs, reflections)
 
 def eliza_chat(incoming_message):
     if incoming_message == 'hello' or incoming_message == 'hi' or incoming_message == 'hey':
-        return random.choice(['Hello!! :D', 'Hiiii :D ', 'Hey there :) ', 'Hello indeed :) '])
+        return random.choice(['Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.', 'Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.', 'Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.', 'Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.'])
     return eliza_chatbot.converse3(incoming_message)
 
 def demo():

@@ -177,6 +177,7 @@ def handler(event, userid, context):
     print 'b ', b
     #------------------------------ Other Entities ----------------------------#
     c = getWords(event.lower())
+    ed = ['b','m','p','d']
     occ = ['Architect', 'Carpenter', 'Drafter', 'Electrician', 'Mechanic', 'Painter', 'Plumber', 'Rigger', 'Roofer', 'Surveyor',\
                   "Aircrew Officer", "Animal Control Worker", "Court Clerk", "Court Reporter", "Detective", "Fire Inspector", "Firefighter", "Immigration and Custom Inspector", "Judge", "Lawyer", "Paralegal", "Police Officer", "Private Detective", "Security Guard",\
                   'Aerospace Engineer', 'Archeologist', 'Astronomer', 'Atmospheric Scientist List of Science Careers', 'List of Science Careers', 'Biologist', 'Cartographer', 'Chemical Engineer', 'Chemist', 'Civil Engineer', 'Engineering Manager', 'Environmental Scientist', 'Forensic Technician', 'Geographer', 'Industrial Engineer', 'Marine Engineer', 'Materials Engineer', 'Mechanical Engineer', 'Nuclear Engineer', 'Oceanographer', 'Physicist',\
@@ -185,6 +186,8 @@ def handler(event, userid, context):
     hbb = ['Reading', 'Tv', 'Family Time', 'Movies', 'Fishing', 'Computer', 'Gardening', 'Renting', 'Walking', 'Exercise', 'Listening', 'Entertaining', 'Hunting', 'Sports', 'Shopping', 'Traveling', 'Sleeping', 'Socializing', 'Sewing', 'Golf', 'Church', 'Relaxing', 'Playing', 'Housework', 'Crafts', 'Watching', 'Bicycling', 'Playing', 'Hiking', 'Cooking', 'Eating', 'Dating', 'Swimming', 'Camping', 'Skiing', 'Cars', 'Writing', 'Boating', 'Motorcycling', 'Animal', 'Bowling', 'Painting', 'Running', 'Dancing', 'Riding', 'Tennis', 'Theater', 'Billiards', 'Beach', 'Volunteer', 'Music', 'Cards']
     hobbies = []
     occupat = ''
+    if event in ed:
+        educ = event
     for each in c:
         if each.title() in occ:
             occupat = each.title()
@@ -210,6 +213,9 @@ def handler(event, userid, context):
             a = a + c_cmall + ' '
     print 'a ', a
     # occupat, hobbies, a, b
+    person = oldner(event, userid)
+    if person['location'] and person['cuisine'] and person['interests'] and person['occupation'] and person['education']:
+        return userid, 'TX', 'So, I think I know enough about you to curate a great eating experince tonight with other like minded people with education and interests. Would you like me to?'
     if a == '' and len(b) == 0:
         if len(hobbies) > 0 and occupat:
             return userid, 'TX', 'Thats some hobbies to have with such occupation! :P '
@@ -228,7 +234,7 @@ def handler(event, userid, context):
             return userid, 'RR', res
         else:
             if person['cuisine'] == '':
-                return userid, 'TX', 'In ' + person['location'] + ', what you may want to eat?'
+                return userid, 'TX', 'In beautiful ' + person['location'] + ', what you may want to eat?'
             else:
                 res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
                 person['cuisine'] = ''
@@ -252,7 +258,7 @@ def handler(event, userid, context):
             else:
                 person['cuisine'] = a
                 updatejson(person)
-                return userid, 'TX', 'Hmmm... Where are you looking for cuisine?'
+                return userid, 'TX', 'Hmmm... Would love to know your city to help you out.'
         else:
             return userid, 'TX', eliza_chat(event)
 
