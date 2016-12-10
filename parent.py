@@ -52,7 +52,7 @@ def oldner(event, userid):
     return user
 
 def updatejson(person):
-    profiles.updateUsuals(person['userid'], person['location'], person['cuisine'], person['text'])
+    profiles.updateUsuals(person['userid'], person['location'], person['cuisine'], "")
 
 # -------------- Calling YELP API ---------------
 def api_callee(event, context):
