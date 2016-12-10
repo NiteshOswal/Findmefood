@@ -217,10 +217,12 @@ def handler(event, userid, context):
     hbb = ['Reading', 'Tv', 'Family Time', 'Movies', 'Fishing', 'Computer', 'Gardening', 'Renting', 'Walking', 'Exercise', 'Listening', 'Entertaining', 'Hunting', 'Sports', 'Shopping', 'Traveling', 'Sleeping', 'Socializing', 'Sewing', 'Golf', 'Church', 'Relaxing', 'Playing', 'Housework', 'Crafts', 'Watching', 'Bicycling', 'Playing', 'Hiking', 'Cooking', 'Eating', 'Dating', 'Swimming', 'Camping', 'Skiing', 'Cars', 'Writing', 'Boating', 'Motorcycling', 'Animal', 'Bowling', 'Painting', 'Running', 'Dancing', 'Riding', 'Tennis', 'Theater', 'Billiards', 'Beach', 'Volunteer', 'Music', 'Cards']
     hobbies = []
     for each in c:
-        if c.title() in occ:
-            occupat = c.title()
-        if c.title() in hbb:
-            hobbies.append(c.title())
+        if each.title() in occ:
+            occupat = each.title()
+        if each.title() in hbb:
+            hobbies.append(each.title())
+    print 'occupat ', occupat
+    print 'hobbies ', hobbies
     #-------------------------------- RETURNS ---------------------------------#
     # return ML
     if len(b) > 1:
