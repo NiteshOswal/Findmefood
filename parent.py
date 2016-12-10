@@ -9,8 +9,14 @@ import sys
 import re
 import json
 import urllib
+import io
 from geotext import GeoText
+import yelp.errors
 from crf_location import crf_exec
+from yelp.client import Client
+from yelp.oauth1_authenticator import Oauth1Authenticator
+sys.path.insert(0, './bot')
+from natasha_chat import eliza_chat
 
 #--------------------------------------------------------------------------#
 # --- userful functions ---
@@ -64,6 +70,34 @@ def updatejson(person):
     with open('data.json', 'w') as f:
          json.dump(data, f)
 
+# -------------- Calling YELP API ---------------
+def api_callee(event, context):
+    # read API keys
+    with io.open('config_secret.json') as cred:
+        creds = json.load(cred)
+        auth = Oauth1Authenticator(**creds)
+        client = Client(auth)
+
+    params = {
+        'term': event['item'],
+        'lang': 'en',
+        'limit': 5
+    }
+    try:
+        response = client.search(event['location'], **params)
+    except Exception, e:
+        return 'Yelp is not available in your country! :/ '
+
+
+    if response.businesses == None:
+        return 'Yelp is not available in your country! :/ '
+    elif len(response.businesses) == 0:
+        return 'Yelp is not available in your country! :/ '
+    else:
+        return response.businesses[0:5]
+    return None
+
+# ------------- main function -------------
 def handler(event, userid, context):
     person = oldner(event, userid)
     print 'person ', person
@@ -148,7 +182,60 @@ def handler(event, userid, context):
     print 'data_ayrton ', data_ayrton
     print 'b1 ', b1
     print 'b ', b
+    #-------------------------------- RETURNS ---------------------------------#
+    # return ML
+    if len(b) > 1:
+        return userid, 'ML', b
+    #------ try tagging food items? ----
+    bb = []
+    for each in b:
+        every = each.split(' ')
+        for many in every:
+            bb.append(many.lower())
+    print 'bb ', bb
+    a = ''
+    c = getWords(event)
+    for c_cmall in c:
+        if c_cmall.lower() not in d1 and c_cmall.lower() not in bb:
+            a = a + c_cmall + ' '
+    print 'a ', a
+    if len(b) == 1:
+        person['location'] = b[0]
+        updatejson(person)
+        if a != '':
+            person['food'] = a
+            res = api_callee({ 'item': person['food'], 'location': person['location']}, 0)
+            person['food'] = ''
+            updatejson(person)
+            return userid, 'RR', res
+        else:
+            if person['food'] == '':
+                return userid, 'TX', 'In ' + person['location'] + ', what you may want to eat?'
+            else:
+                res = api_callee({ 'item': person['food'], 'location': person['location']}, 0)
+                person['food'] = ''
+                updatejson(person)
+                if type(res) == type('Hello'):
+                    return userid, 'TX', res
+                else:
+                    return userid, 'RR', res
+    if len(b) == 0:
+        if person['location'] == '':
+            return userid, 'TX', eliza_chat(event)
+        else:
+            if a != '':
+                person['food'] = a
+                res = api_callee({ 'item': person['food'], 'location': person['location']}, 0)
+                person['food'] = ''
+                updatejson(person)
+                if type(res) == type('Hello'):
+                    return userid, 'TX', res
+                else:
+                    return userid, 'RR', res
+            else:
+                return userid, 'TX', eliza_chat(event)
+
 
 #handler("I am in bangalore, london, and lake forest, calif and having a good time", 104 ,0)
 jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
-handler(str(jdblove), sys.argv[2], 0)
+print handler(str(jdblove), sys.argv[2], 0)
