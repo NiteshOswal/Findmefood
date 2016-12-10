@@ -49,11 +49,10 @@ def zipcode(event):
 #--------------------------------------------------------------------------#
 def oldner(event, userid):
     user = profiles.get(userid)
-    user['food'] = user['cuisine']
     return user
 
 def updatejson(person):
-    profiles.updateUsuals(person['userid'], person['location'], person['food'], person['text'])
+    profiles.updateUsuals(person['userid'], person['location'], person['cuisine'], person['text'])
 
 # -------------- Calling YELP API ---------------
 def api_callee(event, context):
@@ -87,7 +86,7 @@ def handler(event, userid, context):
     person = oldner(event, userid)
     if event.lower() == 'draw me like one of your french girls':
         person['location'] = ''
-        person['food'] = ''
+        person['cuisine'] = ''
         updatejson(person)
         return userid, 'TX', 'Start fresh you virgin...'
     if event.lower() == 'show my element':
@@ -196,7 +195,7 @@ def handler(event, userid, context):
     # return ML
     if len(b) > 1:
         return userid, 'ML', b
-    #------ try tagging food items? ----
+    #------ try tagging cuisine items? ----
     bb = []
     for each in b:
         every = each.split(' ')
@@ -213,17 +212,17 @@ def handler(event, userid, context):
         person['location'] = b[0]
         updatejson(person)
         if a != '':
-            person['food'] = a
-            res = api_callee({ 'item': person['food'], 'location': person['location']}, 0)
-            person['food'] = ''
+            person['cuisine'] = a
+            res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
+            person['cuisine'] = ''
             updatejson(person)
             return userid, 'RR', res
         else:
-            if person['food'] == '':
+            if person['cuisine'] == '':
                 return userid, 'TX', 'In ' + person['location'] + ', what you may want to eat?'
             else:
-                res = api_callee({ 'item': person['food'], 'location': person['location']}, 0)
-                person['food'] = ''
+                res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
+                person['cuisine'] = ''
                 updatejson(person)
                 if type(res) == type('Hello'):
                     return userid, 'TX', res
@@ -232,18 +231,18 @@ def handler(event, userid, context):
     if len(b) == 0:
         if a != '':
             if person['location'] != '':
-                person['food'] = a
-                res = api_callee({ 'item': person['food'], 'location': person['location']}, 0)
-                person['food'] = ''
+                person['cuisine'] = a
+                res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
+                person['cuisine'] = ''
                 updatejson(person)
                 if type(res) == type('Hello'):
                     return userid, 'TX', res
                 else:
                     return userid, 'RR', res
             else:
-                person['food'] = a
+                person['cuisine'] = a
                 updatejson(person)
-                return userid, 'TX', 'Hmmm... Where are you looking for food?'
+                return userid, 'TX', 'Hmmm... Where are you looking for cuisine?'
         else:
             return userid, 'TX', eliza_chat(event)
 
@@ -252,8 +251,8 @@ def handler(event, userid, context):
 #jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
 #print handler(str(jdblove), sys.argv[2], 0)
 def supertest():
-    m = ['hi', 'I am in london', 'looking for indian food', 'i love music and tv', 'i am an architect']
-    n = ['i am looking for thai food', 'in london', 'i am a doctor']
+    m = ['hi', 'I am in london', 'looking for indian cuisine', 'i love music and tv', 'i am an architect']
+    n = ['i am looking for thai cuisine', 'in london', 'i am a doctor']
     o = ['hi', 'who are you', 'what do you do?', 'okay bye']
     p = ['you say yes, i say no, you say go, i say no no, you say goodbye, i say hello hello', 'fuck that shit', 'i love you']
     for each in m:
