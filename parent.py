@@ -184,6 +184,7 @@ def handler(event, userid, context):
                   ]
     hbb = ['Reading', 'Tv', 'Family Time', 'Movies', 'Fishing', 'Computer', 'Gardening', 'Renting', 'Walking', 'Exercise', 'Listening', 'Entertaining', 'Hunting', 'Sports', 'Shopping', 'Traveling', 'Sleeping', 'Socializing', 'Sewing', 'Golf', 'Church', 'Relaxing', 'Playing', 'Housework', 'Crafts', 'Watching', 'Bicycling', 'Playing', 'Hiking', 'Cooking', 'Eating', 'Dating', 'Swimming', 'Camping', 'Skiing', 'Cars', 'Writing', 'Boating', 'Motorcycling', 'Animal', 'Bowling', 'Painting', 'Running', 'Dancing', 'Riding', 'Tennis', 'Theater', 'Billiards', 'Beach', 'Volunteer', 'Music', 'Cards']
     hobbies = []
+    occupat = ''
     for each in c:
         if each.title() in occ:
             occupat = each.title()
