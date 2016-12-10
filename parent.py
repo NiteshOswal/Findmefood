@@ -7,19 +7,65 @@
 
 import sys
 import re
+import json
 from geotext import GeoText
 from crf_location import crf_exec
 
-###############################################################################
-# --- userful functions
-###############################################################################
+#--------------------------------------------------------------------------#
+# --- userful functions ---
+#--------------------------------------------------------------------------#
 def getWords(data):
     return re.compile(r"[\w']+").findall(data)
 
 def getWords_special_location(data):
     return re.compile(r"[\w'/.,-@]+").findall(data)
 
-def handler(event, context):
+#--------------------------------------------------------------------------#
+# ---- JSON Database lib functions --- data.json
+#--------------------------------------------------------------------------#
+def oldner(event, userid):
+    with open('data.json', 'r') as f:
+         data = json.load(f)
+    flag = False
+    for i in data["people"]:
+        if i["userid"] == userid:
+            #i["count"] = i["count"] + 1
+            flag = True
+            with open('data.json', 'w') as f:
+                 json.dump(data, f)
+            return i
+    if flag == False:
+        killbill = {
+              "userid": userid,
+              "location":"",
+              "food":"",
+              "generated":"False",
+              "flag":"",
+              "count":0,
+              "text":"first time event"
+              }
+        data["people"].append(killbill)
+        with open('data.json', 'w') as f:
+             json.dump(data, f)
+        return killbill
+
+    #print len(data['people'])
+    # Writing JSON data
+def updatejson(person):
+    with open('data.json', 'r') as f:
+         data = json.load(f)
+    for i in data['people']:
+        if i['userid'] == person['userid']:
+            i['location'] = person['location']
+            i['text'] = person['text']
+            i['count'] = i['count'] + 1
+            break
+    with open('data.json', 'w') as f:
+         json.dump(data, f)
+
+def handler(event, userid, context):
+    person = oldner(event, userid)
+    print 'person ', person
     c = getWords(event)
     lust = getWords_special_location(event)
     d1 = ['i', 'live', 'in', 'please', 'hi', 'give', 'find', 'who', 'what', 'my', 'hungry', 'near', 'me', 'thank', 'you', \
@@ -52,9 +98,9 @@ def handler(event, context):
                 bang = bang + c_cmall[:-1].title() + ' ' + c_cmall[-1] + ' '
             else:
                 bang = bang + c_cmall[:-1] + ' ' + c_cmall[-1] + ' '
-    ############################################################################
+    #--------------------------------------------------------------------------#
     # --- GeoText --- find cities from python open source lib
-    ############################################################################
+    #--------------------------------------------------------------------------#
     c = getWords_special_location(event)
     a = ''
     for c_cmall in c:
@@ -65,11 +111,53 @@ def handler(event, context):
     #print a
     potentiav = GeoText(a)
     b1 = potentiav.cities
-    print b1
-    ############################################################################
+    print 'b1 ', b1
+    #--------------------------------------------------------------------------#
     # --- Senna --- use CRF for NER
-    ############################################################################
+    #--------------------------------------------------------------------------#
     a = crf_exec(bang, 0)
-    print a
+    print 'a ', a
+    # --- changing format, removing . , ;
+    # --- might need to add more drop_char
+    data_ayrton=[]
+    b=[]
+    drop_char = ['.', ',', ';']
+    for i in a:
+        if i[0][-1] in drop_char:
+            j = i[0][:-1]
+        else:
+            j = i[0]
+        data_ayrton.append([str(j), str(i[1]), str(i[2]), str(i[3])])
+    # --- reintitializing data_ayrton, use only for location
+    c = data_ayrton
+    data_ayrton = []
+    i=0
+    p_loc = ''
+    p_loc_ref = []
+    for atom in c:
+        if atom[2][-3:] == 'LOC' and atom[0] not in p_loc_ref:
+            p_loc = p_loc + atom[0] + ' '
+            p_loc_ref.append(atom[0])
+            data_ayrton.append(p_loc)
+            p_loc = ''
+        i = i + 1
+            #p_loc_ref = []
+    j=''
+    for i in data_ayrton:
+        j = j + i
+    j=j.replace(' ','')
+    k=''
+    for i in b1:
+        k = k + i
+    k=k.replace(' ','')
+    # append to Data_ayrton from GeoText
+    if j!=k:
+        data_ayrton = data_ayrton + b1
+    print 'data_ayrton ', data_ayrton
+    j = ''
+    for i in data_ayrton:
+        j = j + i + ' '
+    b = j
+    print 'b ', b
 
-handler("I am in bangalore and having a good time", 0)
+handler("I am in bangalore and having a good time", 104 ,0)
