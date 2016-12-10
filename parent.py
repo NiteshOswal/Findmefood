@@ -210,9 +210,17 @@ def handler(event, userid, context):
     a = ''
     c = getWords(event)
     for c_cmall in c:
-        if c_cmall.lower() not in d1 and c_cmall.lower() not in bb:
+        if c_cmall.lower() not in d1 and c_cmall.lower() not in bb and c_cmall.lower().title() not in hobbies and c_cmall.lower().title() != occupat:
             a = a + c_cmall + ' '
     print 'a ', a
+    # occupat, hobbies, a, b
+    if a == '' and len(b) == 0:
+        if len(hobbies) > 0 and occupat:
+            return userid, 'TX', 'Thats some hobbies to have with such occupation! :P '
+        if len(hobbies) > 0:
+            return userid, 'TX', 'Cool hobbies you have. Good for you!'
+        if occupat:
+            return userid, 'TX', 'Love your occupation, wish I could do that! :P '
     if len(b) == 1:
         person['location'] = b[0]
         updatejson(person)
@@ -235,6 +243,7 @@ def handler(event, userid, context):
                     return userid, 'RR', res
     if len(b) == 0:
         if a != '':
+	    print person
             if person['location'] != '':
                 person['cuisine'] = a
                 res = api_callee({ 'item': person['cuisine'], 'location': person['location']}, 0)
@@ -256,7 +265,7 @@ def handler(event, userid, context):
 #jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
 #print handler(str(jdblove), sys.argv[2], 0)
 def supertest():
-    m = ['hi', 'I am in london', 'looking for indian cuisine', 'i love music and tv', 'i am an architect']
+    m = ['hi', 'I am in london', 'looking for thai food', 'i love music and tv', 'i am an architect']
     n = ['i am looking for thai cuisine', 'in london', 'i am a doctor']
     o = ['hi', 'who are you', 'what do you do?', 'okay bye']
     p = ['you say yes, i say no, you say go, i say no no, you say goodbye, i say hello hello', 'fuck that shit', 'i love you']
