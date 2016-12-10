@@ -250,3 +250,9 @@ def handler(event, userid, context):
 #handler("I am in bangalore, london, and lake forest, calif and having a good time", 104 ,0)
 #jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
 #print handler(str(jdblove), sys.argv[2], 0)
+def supertest():
+    m = ['hi', 'I am in london', 'looking for indian food', 'i love music and tv', 'i am an architect']
+    for each in m:
+        print handler(each, 104, 0)
+
+supertest()
