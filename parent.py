@@ -1,11 +1,18 @@
+# Nitesh Oswal & Ruchir Patel
+# At Botathon, Bangalore for Hey Natasha http://tonatasha.com
+#
+#---------- open source stuff used --------------------------------------------#
+# Senna http://ronan.collobert.com/senna/
+# GeoText http://geotext.readthedocs.io/en/latest/contributing.html
+
 import sys
 import re
 from geotext import GeoText
 from crf_location import crf_exec
 
-##############################################################################
+###############################################################################
 # --- userful functions
-##############################################################################
+###############################################################################
 def getWords(data):
     return re.compile(r"[\w']+").findall(data)
 
@@ -32,27 +39,22 @@ def handler(event, context):
             'moron', 'dumb', 'fuck', 'fucking', 'sex', 'indeed', 'sure', 'enough', 'man', 'show', 'showing', 'then', 'than',\
             'ok', 'okay', 'alright', 'cool', 'dude', 'lady', 'girl', 'else', 'other', 'any', 'anything', 'more', 'stuff']
     #d1 = []
-    #kiss = ''
     bang = ''
     bump_last = ['.', ',', ';', ':', '(', ')', '?', '!']
     for c_cmall in lust:
         if c_cmall[-1] not in bump_last:
             if c_cmall not in d1:
-                #kiss = kiss + c_cmall.title() + ' '
                 bang = bang + c_cmall.title() + ' '
             else:
-                #kiss = kiss + c_cmall + ' '
                 bang = bang + c_cmall + ' '
         else:
             if c_cmall not in d1:
-                #kiss = kiss + c_cmall[:-1].title() + ' '
                 bang = bang + c_cmall[:-1].title() + ' ' + c_cmall[-1] + ' '
             else:
-                #kiss = kiss + c_cmall[:-1] + ' '
                 bang = bang + c_cmall[:-1] + ' ' + c_cmall[-1] + ' '
-    ##############################################################################
-    # --- find cities from python open source lib
-    #################################################################################
+    ############################################################################
+    # --- GeoText --- find cities from python open source lib
+    ############################################################################
     c = getWords_special_location(event)
     a = ''
     for c_cmall in c:
@@ -63,9 +65,10 @@ def handler(event, context):
     #print a
     potentiav = GeoText(a)
     b1 = potentiav.cities
-    ##############################################################################
-    # ----- use CRF for NER
-    #################################################################################
+    print b1
+    ############################################################################
+    # --- Senna --- use CRF for NER
+    ############################################################################
     a = crf_exec(bang, 0)
     print a
 
