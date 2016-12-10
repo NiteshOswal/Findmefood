@@ -8,6 +8,7 @@
 import sys
 import re
 import json
+import urllib
 from geotext import GeoText
 from crf_location import crf_exec
 
@@ -160,4 +161,6 @@ def handler(event, userid, context):
     b = j
     print 'b ', b
 
-handler("I am in bangalore and having a good time", 104 ,0)
+#handler("I am in bangalore, london, and lake forest, calif and having a good time", 104 ,0)
+jdblove = urllib.unquote_plus(urllib.unquote_plus(str(sys.argv[1])))
+handler(str(jdblove), sys.argv[2], 0)
