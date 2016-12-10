@@ -15,19 +15,22 @@ urls = (
 
 def push(id, message):
     response = requests.post("https://graph.facebook.com/v2.6/me/messages", 
-        data={
+        data=json.dumps({
             "recipient": {
                 "id": id
             },
             "message": {
                 "text": message
             }
-        },
+        }),
         params={
             "access_token": os.environ.get("PAGE_ACCESS_TOKEN")
+        },
+        headers={
+            "content-type": "application/json"
         }
     )
-    return response.text
+    return json.loads(response.text)
 
 class index(object):
     def __init__(self):
@@ -43,7 +46,6 @@ class index(object):
         raw = web.data()
         if raw:
             payload = json.loads(raw)
-
         if "messaging" in payload["entry"][0]:
             for message in payload["entry"][0]["messaging"]:
                 text = ""
@@ -51,11 +53,9 @@ class index(object):
                     text = json.dumps(message["postback"])
                 elif "message" in message:
                     text = message["message"]["text"]
-                push(message["sender"]["id"], text)
+                return push(message["sender"]["id"], text)
 
-        return json.dumps({
-            "status": True
-        })
+        return push(message["sender"]["id"], "So something went wong there.. IYKWIM")
 
 if __name__ == '__main__':
     app = web.application(urls, globals())
