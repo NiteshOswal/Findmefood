@@ -191,7 +191,11 @@ def handler(event, userid, context):
         if each.title() in hbb:
             hobbies.append(each.title())
     print 'occupat ', occupat
+    if occupat:
+        profiles.updateParam(userid, 'occupation', occupat)
     print 'hobbies ', hobbies
+    if len(hobbies) > 0:
+        profiles.updateParam(userid, 'interests', hobbies)
     #-------------------------------- RETURNS ---------------------------------#
     # return ML
     if len(b) > 1:
