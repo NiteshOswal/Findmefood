@@ -17,6 +17,7 @@ from yelp.client import Client
 from yelp.oauth1_authenticator import Oauth1Authenticator
 sys.path.append('./bot')
 sys.path.append('./models')
+import profiles
 from natasha_chat import eliza_chat
 
 #--------------------------------------------------------------------------#
