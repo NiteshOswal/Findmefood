@@ -135,7 +135,7 @@ def handler(event, userid, context):
         print sentences
         if len(sentences) > 0:
             ss = sid.polarity_scores(sentences)
-            return userid, "TX", "We found it's " + str(ceil(float(ss["pos"]) * 100)) + "% likely you'd like this place"
+            return userid, "TX", "I found, it's " + str(ceil(float(ss["pos"]) * 100)) + "% likely you'd like this place"
         else:
             return userid, "TX", "Hmm couldn't find many reviews for this.. :("
     person = oldner(event, userid)
