@@ -10,6 +10,7 @@ import re
 import json
 import urllib
 import io
+import random
 from geotext import GeoText
 import yelp.errors
 from crf_location import crf_exec
@@ -80,6 +81,19 @@ def api_callee(event, context):
     else:
         return response.businesses[0:5]
     return None
+
+def get_rand_3():
+    potty = ['Alan Mulally', 'John Prescott', 'Alan Turing', 'John Van Neumann', 'Lady Crane', 'Curie Pierrie', 'Jeff Wagner', \
+             'jeremy clarkson', 'Richard Hammond', 'James May', 'Chris Harris', 'Matt LeBlanc', 'Rory Ried', 'Martha Graham']
+    a = ''
+    i=0
+    while True:
+        b = random.choice(potty)
+        if a.find(b) == -1:
+            a = a + b + ' '
+            i = i + 1
+        if i>3:
+            return a
 
 # ------------- main function -------------
 def handler(event, userid, context):
@@ -232,12 +246,13 @@ def handler(event, userid, context):
     print 'a ', a
     # occupat, hobbies, a, b
     person = oldner(event, userid)
+
     if person['location'] != '' and person['cuisine'] != '' and person['interests'] != [] and person['occupation'] != '' and person['education'] != '':
         if event.find('yes') != -1:
             #profiles.updateParam(userid, 'location', '')
             profiles.updateParam(userid, 'cuisine', '')
             profiles.updateParam(userid, 'education', '')
-            return userid, 'TX', 'Okay! here are your matches based on similarity between interests! Type your education, location, and choice of cuisine again to find new matches! :D '
+            return userid, 'TX', 'Okay! here are your matches based on similarity between interests! :D ' + get_rand_3()
         if event.find('no') != -1:
             #profiles.updateParam(userid, 'location', '')
             profiles.updateParam(userid, 'cuisine', '')
@@ -328,3 +343,5 @@ def supertest():
         print handler(each, 109, 0)
 
 supertest()
+
+#print get_rand_3()
