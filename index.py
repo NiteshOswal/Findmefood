@@ -86,7 +86,7 @@ class index(object):
                                 idx = response.find("<-> Bachelor, <-> Master, <-> PhD, <-> MD")
                                 if template == "TX" and idx > -1:
                                     print push(message["sender"]["id"], "OC", response[0:idx].strip())
-                                else
+                                else:
                                     print push(message["sender"]["id"], template, response)
                             else:
                                 print push(message["sender"]["id"], template, response)
