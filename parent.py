@@ -100,7 +100,7 @@ def api_reviews(business_id):
     bt = yelp3.obtain_bearer_token(yelp3.API_HOST, yelp3.TOKEN_PATH)
     _reviews = []
     try:
-        response = client.get_business(bt, business_id)
+        response = yelp3.get_business(bt, business_id)
     except Exception, e:
         print str(e)
         return _reviews
