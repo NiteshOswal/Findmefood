@@ -84,26 +84,22 @@ def api_callee(event, context):
 
 def api_reviews(business_id):
     # read API keys
-    with io.open('config_secret.json') as cred:
-        creds = json.load(cred)
-        auth = Oauth1Authenticator(**creds)
-        client = Client(auth)
+    yelp3.CLIENT_ID = os.environ.get("YELP_CON_KEY")
+    yelp3.CLIENT_SECRET = os.environ.get("YELP_CON_SEC")
 
-    params = {
-        'lang': 'en'
-    }
+    bt = yelp3.obtain_bearer_token(yelp3.API_HOST, yelp3.TOKEN_PATH)
     _reviews = []
     try:
-        response = client.get_business(business_id, **params)
+        response = client.get_business(bt, business_id)
     except Exception, e:
         print str(e)
         return _reviews
-    for review in response.business.reviews:
-        _reviews.append({
-            "text": review.excerpt,
-            "id": review.id,
-            "rating": review.rating
-        })
+    if "reviews" in response:
+        for review in response["reviews"]:
+            _reviews.append({
+                "text": review["text"],
+                "rating": review["rating"]
+            })
     return _reviews
 
 def get_rand_3():
