@@ -66,7 +66,7 @@ def RR(payload):
                 {
                     "type": "postback",
                     "title": "Is it good?",
-                    "payload": postbacks["RR_IS_IT_GOOD"]
+                    "payload": postbacks["RR_IS_IT_GOOD_%s" % (element.id)]
                 }
             ]
         })
