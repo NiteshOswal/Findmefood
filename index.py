@@ -98,7 +98,7 @@ class index(object):
                         print push(message["sender"]["id"], str(e), 0)
                 # this postback is necessary
                 elif "postback" in message:
-                    if message["message"]["postback"]["payload"].startswith("RR_IS_IT_GOOD_"):
+                    if message["postback"]["payload"].startswith("RR_IS_IT_GOOD_"):
                         reviews = parent.api_reviews(message["message"]["postback"]["payload"].replace("RR_IS_IT_GOOD_"))
                         id, template, response = parent.handler(reviews, message["sender"]["id"], 1)
                         print push(message["sender"]["id"], template, response)
