@@ -84,14 +84,15 @@ class index(object):
                             print id, template, response
                             idx = response.find("<-> Bachelor, <-> Master, <-> PhD, <-> MD")
                             if template == "TX" and idx > -1:
-                                push(message["sender"]["id"], "OC", response[0:idx].strip())
+                                print push(message["sender"]["id"], "OC", response[0:idx].strip())
                             else:
-                                return push(message["sender"]["id"], template, response)
+                                print push(message["sender"]["id"], template, response)
+                            return "Messages!"
                         elif "attachments" in message["message"]:
                             print "Attachment"
                             pprint(message["attachments"])
                     except:
-                        return push(message["sender"]["id"], "Something bad happened here..", 0)
+                        print push(message["sender"]["id"], "Something bad happened here..", 0)
 
 
 
