@@ -276,9 +276,9 @@ def handler(event, userid, context):
     print 'a ', a
     # occupat, hobbies, a, b
     person = oldner(event, userid)
-
+    event = event.lower()
     if person['location'] != '' and person['cuisine'] != '' and person['interests'] != [] and person['occupation'] != '' and person['education'] != '':
-        if event.find('yes') != -1:
+        if event.find('yes') != -1 or event.find('sure') != -1 or event.find('yeah') != -1:
             #profiles.updateParam(userid, 'location', '')
             profiles.updateParam(userid, 'cuisine', '')
             profiles.updateParam(userid, 'education', '')
