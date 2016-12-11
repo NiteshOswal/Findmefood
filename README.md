@@ -15,43 +15,4 @@ Step 1: go to this page https://www.facebook.com/Findmefood-153737525105424/
 Step 2: send you profile link and address with connected email id to nit.oswal@gmail.com or ruchir@tonatasha.com, once we add you in as a dev tester, since FB approval takes a couple of days.
 Step 3: just say "hi". We hope that the natural flow is intuitive enough to make the bot useful.
 
-<b> Example </b>
-
-
-
-template.json
-
-```
-{
-  "columns": [
-    ["unique id", "number"],
-    ["some column name", "string"],
-    ["other column name", "string"],
-    ["one more column", "array"],
-    ["a column", "bool"]
-  ]
-}
-
-```
-test.py
-
-```
-from jsondb import manage_element
-
-dbfile = 'data.json'
-manage_element.init_json(dbfile, 'trial')
-
-a = manage_element.get_element(dbfile,'103')
-a['other column name'] = 'Testing on Oct 21'
-a['one more column'] = ['the', 'beatles', 21]
-manage_element.update_element(dbfile, a)
-
-print manage_element.get_element(dbfile,'103')
-```
-
-Output
-
-```
-$ python test.py
-{u'one more column': [u'the', u'beatles', 21], u'unique id': -1, u'other column name': u'Testing on Oct 21', u'some column name': u'', u'a column': u'False', u'id': u'103'}
-```
+<b> Example of conversation</b>
