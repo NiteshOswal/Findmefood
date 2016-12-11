@@ -2,7 +2,7 @@ import inflection
 
 postbacks = {
     "ML_LOCATION": "ML_LOCATION",
-    "RR_IS_IT_GOOD": "RR_IS_IT_GOOD",
+    "RR_IS_IT_GOOD": "RR_IS_IT_GOOD_%s",
     "RR_SHOW_MORE": "RR_SHOW_MORE",
     "OC_SELECT": "OC_SELECT"
 }
@@ -66,7 +66,7 @@ def RR(payload):
                 {
                     "type": "postback",
                     "title": "Is it good?",
-                    "payload": postbacks["RR_IS_IT_GOOD_%s" % (element.id)]
+                    "payload": postbacks["RR_IS_IT_GOOD"] % (element.id)
                 }
             ]
         })
