@@ -73,7 +73,7 @@ pairs = (
   (r'I think (.*)',
   ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
     "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
-    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD "))),
+    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'Yes',
   ( "I need you to tell me what would you like to eat and where.",
@@ -82,12 +82,12 @@ pairs = (
   (r'Is it (.*)',
   ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
     "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
-    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD "))),
+    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'It is (.*)',
   ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
     "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
-    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD "))),
+    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'Can you(.*)',
   ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
