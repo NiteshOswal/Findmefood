@@ -23,6 +23,14 @@ import yelp3
 import profiles
 from natasha_chat import eliza_chat
 
+from nltk.classify import NaiveBayesClassifier
+from nltk.corpus import subjectivity
+from nltk.sentiment import SentimentAnalyzer
+from nltk.sentiment.util import *
+
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+sid = SentimentIntensityAnalyzer()
+
 #--------------------------------------------------------------------------#
 # --- userful functions ---
 #--------------------------------------------------------------------------#
@@ -122,7 +130,12 @@ def get_rand_3():
 # ------------- main function -------------
 def handler(event, userid, context):
     if context == 1:
-        return userid, "TX", "What do you mean?"
+        sentences = " ".join([e["text"] for e in event])
+        if len(sentences) > 0:
+            ss = sid.polarity_scores(sentence)
+            return userid, "TX", "We found it's " + str(ceil(float(ss["pos"]) * 100)) + "% likely you'd like this place"
+        else:
+            return userid, "TX", "Hmm couldn't find many reviews for this.. :("
     person = oldner(event, userid)
     if event.lower() == 'draw me like one of your french girls':
         profiles.updateParam(userid, 'education', '')
