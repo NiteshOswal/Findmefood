@@ -130,7 +130,9 @@ def get_rand_3():
 # ------------- main function -------------
 def handler(event, userid, context):
     if context == 1:
+        print event
         sentences = " ".join([e["text"] for e in event])
+        print sentences
         if len(sentences) > 0:
             ss = sid.polarity_scores(sentence)
             return userid, "TX", "We found it's " + str(ceil(float(ss["pos"]) * 100)) + "% likely you'd like this place"
