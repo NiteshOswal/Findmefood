@@ -80,7 +80,11 @@ class index(object):
                             profiles.init(message["sender"]["id"])
                             id, template, response = parent.handler(text, message["sender"]["id"], 0)
                             print id, template, response
-                            return push(message["sender"]["id"], template, response)
+                            idx = response.find("<-> Bachelor, <-> Master, <-> PhD, <-> MD")
+                            if template == "TX" and idx > -1:
+                                push(message["sender"]["id"], "OC", response[0:idx].strip())
+                            else:
+                                return push(message["sender"]["id"], template, response)
                         elif "attachments" in message["message"]:
                             print "Attachment"
                             pprint(message["attachments"])
