@@ -6,6 +6,7 @@
 # GeoText http://geotext.readthedocs.io/en/latest/contributing.html
 
 import sys
+import os
 import re
 import json
 import urllib
