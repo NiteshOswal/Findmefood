@@ -42,7 +42,7 @@ pairs = (
   ( "Sure you may... But I can only help you find food. Mind telling me your city?",
     "I am not so sure about that, but i can help you find food if you tell me where you are.")),
 
-  (r'What (.*)',
+  (r'What(.*)',
   ( "I am a narrow AI, which brings like minded people together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
     "I bring like minded people to have an amazing dining experience. :D Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
     "I use my database to find people with similar taste in life for a great meal. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
@@ -53,10 +53,13 @@ pairs = (
     "I am what I am. Not what you think! Please ask open ended and minded questions. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
     "I may be %1 -- may be not -- whatever you think doesn't matter! :P Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
-  (r'How (.*)',
+  (r'How(.*)',
   ( "How I do is of my business. Mind minding your own sweetheart? :P ",
     "Perhaps you could answer your own questions love. :) ",
-    "You better mind your own business. :P ")),
+    "You better mind your own business. :P ",
+    "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+      "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+      "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'Because(.*)',
   ( "Maybe i don't care.",
@@ -68,20 +71,23 @@ pairs = (
     "Don't :P Let me find food near your place.")),
 
   (r'I think (.*)',
-  ( "Do you doubt %1?",
-    "Do you really think so?",
-    "But you're not sure %1?")),
+  ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'Yes',
   ( "I need you to tell me what would you like to eat and where.",
     "OK, but can you elaborate a bit? What and where you want to eat?")),
 
   (r'Is it (.*)',
-  ( "I am only good at finding places to eat. Please hit me up with new query. ",
-    "It could well be that %1. I don't know.")),
+  ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'It is (.*)',
-  ( "You seem very certain.","What would you like to eat? where?")),
+  ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
+    "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'Can you(.*)',
   ( "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
@@ -128,6 +134,30 @@ pairs = (
        "Bye... see you soon :P ",
        "Hope to catch you later :D ",
        "Loved helping you out. Bye! :) ")),
+
+     (r'(.*)like(.*)',
+     ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
+
+     (r'(.*)people(.*)',
+     ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
+
+     (r'(.*)person(.*)',
+     ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
+
+     (r'(.*)help(.*)',
+     ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
 
     (r'(.*)',
     ( "Cool!",
