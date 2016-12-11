@@ -82,6 +82,30 @@ def api_callee(event, context):
         return response.businesses[0:5]
     return None
 
+def api_reviews(business_id):
+    # read API keys
+    with io.open('config_secret.json') as cred:
+        creds = json.load(cred)
+        auth = Oauth1Authenticator(**creds)
+        client = Client(auth)
+
+    params = {
+        'lang': 'en'
+    }
+    _reviews = []
+    try:
+        response = client.get_business(business_id, **params)
+    except Exception, e:
+        print str(e)
+        return _reviews
+    for review in response.business.reviews:
+        _reviews.append({
+            "text": review.excerpt,
+            "id": review.id,
+            "rating": review.rating
+        })
+    return _reviews
+
 def get_rand_3():
     potty = ['Alan Mulally', 'John Prescott', 'Alan Turing', 'John Van Neumann', 'Lady Crane', 'Curie Pierrie', 'Jeff Wagner', \
              'jeremy clarkson', 'Richard Hammond', 'James May', 'Chris Harris', 'Matt LeBlanc', 'Rory Ried', 'Martha Graham']

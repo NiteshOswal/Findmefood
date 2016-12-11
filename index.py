@@ -94,6 +94,11 @@ class index(object):
                         elif "attachments" in message["message"]:
                             print "Attachment"
                             pprint(message["attachments"])
+                        elif "postback" in message["message"]:
+                            if message["message"]["postback"]["payload"].startswith("RR_IS_IT_GOOD_"):
+                                reviews = parent.api_reviews(message["message"]["postback"]["payload"].replace("RR_IS_IT_GOOD_"))
+                                id, template, response = parent.handler(reviews, message["sender"]["id"], 1)
+                                print push(message["sender"]["id"], template, response)
                     except Exception, e:
                         print push(message["sender"]["id"], str(e), 0)
 
