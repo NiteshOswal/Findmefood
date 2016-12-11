@@ -4,7 +4,7 @@ import word2vec
 
 from scipy import spatial
 
-model = word2vec.load('./vectors.bin')
+#model = word2vec.load('./vectors.bin')
 '''a=model['entrepreneurship']
 b=model['entrepreneur']
 result = 1 - spatial.distance.cosine(a, b)
@@ -77,4 +77,24 @@ p2 = {
     "interests": ["Music", "love"],
     "cuisine": "american food"
 }
-print profile_similarity(p1,p2)
+#print profile_similarity(p1,p2)
+
+from nltk.classify import NaiveBayesClassifier
+from nltk.corpus import subjectivity
+from nltk.sentiment import SentimentAnalyzer
+from nltk.sentiment.util import *
+
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+sid = SentimentIntensityAnalyzer()
+sentences = ['i love you', 'you are awesome', 'you are fucking awesome', 'you are fucking awful']
+i = 0
+a=[]
+for sentence in sentences:
+    a.append([])
+    a[i].append(sentence)
+    ss = sid.polarity_scores(sentence)
+    for k in sorted(ss):
+        a[i].append('{0}: {1}, '.format(k, ss[k]))
+    i = i + 1
+    print
+print a
