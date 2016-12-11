@@ -20,6 +20,7 @@ def push(id, type, payload):
     # just to be sure
     try:
         message = getattr(globals()['templates'], type)(payload)
+        print "Type of template", type
         pprint(message)
         response = requests.post("https://graph.facebook.com/v2.6/me/messages", 
             data=json.dumps({
@@ -35,6 +36,7 @@ def push(id, type, payload):
                 "content-type": "application/json"
             }
         )
+        print "Response ", response.text
         return {
             "status": True,
             "response": json.loads(response.text)
