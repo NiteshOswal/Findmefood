@@ -16,3 +16,9 @@ Step 2: send you profile link and address with connected email id to nit.oswal@g
 Step 3: just say "hi". We hope that the natural flow is intuitive enough to make the bot useful.
 
 <b> Example of conversation</b>
+
+https://rawgithub.com/NiteshOswal/Findmefood/master/img/1.PNG
+
+https://rawgithub.com/NiteshOswal/Findmefood/master/img/2.PNG
+
+https://rawgithub.com/NiteshOswal/Findmefood/master/img/3.PNG
