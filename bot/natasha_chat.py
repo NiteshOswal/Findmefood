@@ -135,6 +135,30 @@ pairs = (
        "Hope to catch you later :D ",
        "Loved helping you out. Bye! :) ")),
 
+     (r'(.*)like(.*)',
+     ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
+
+     (r'(.*)people(.*)',
+     ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
+
+     (r'(.*)person(.*)',
+     ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
+
+     (r'(.*)help(.*)',
+     ( "Hello!! :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hiiii :D I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hey there :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.",
+       "Hello indeed :) I am a narrow AI. I curate amazing experince by bringing like minded people over a meal.")),
+
     (r'(.*)',
     ( "Cool!",
     "IDK!",
