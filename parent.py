@@ -93,7 +93,8 @@ def get_rand_3():
             a = a + b + ', '
             i = i + 1
         if i>3:
-            a[-1] = '.'
+            a = a[:-1]
+            a = a+'.'
             return a
 
 # ------------- main function -------------
