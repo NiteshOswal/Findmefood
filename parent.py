@@ -90,9 +90,10 @@ def get_rand_3():
     while True:
         b = random.choice(potty)
         if a.find(b) == -1:
-            a = a + b + ' '
+            a = a + b + ', '
             i = i + 1
         if i>3:
+            a[-1] = '.'
             return a
 
 # ------------- main function -------------
