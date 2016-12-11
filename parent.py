@@ -123,6 +123,8 @@ def get_rand_3():
 
 # ------------- main function -------------
 def handler(event, userid, context):
+    if context = 1:
+        return userid, "TX", "What do you mean?"
     person = oldner(event, userid)
     if event.lower() == 'draw me like one of your french girls':
         profiles.updateParam(userid, 'education', '')
