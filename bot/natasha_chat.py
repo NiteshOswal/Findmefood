@@ -59,7 +59,7 @@ pairs = (
     "You better mind your own business. :P ",
     "Hmmm... may be not. I can bring people with similar interests together! :) Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
       "I can indeed find food near your locale; and some amazing people to hang out. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ",
-      "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD "))),
+      "Find food, I can. Bring together I, like minded people. Yoda fan, I am. Tell me you education to get started! <-> Bachelor, <-> Master, <-> PhD, <-> MD ")),
 
   (r'Because(.*)',
   ( "Maybe i don't care.",
