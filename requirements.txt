@@ -20,7 +20,7 @@ numpy==1.11.2
 oauth2==1.9.0.post1
 parsedatetime==1.4
 pbr==1.8.0
-psutil==3.4.2
+psutil==5.6.6
 pyasn1==0.1.9
 PyICU==1.9.2
 pyOpenSSL==0.15.1
