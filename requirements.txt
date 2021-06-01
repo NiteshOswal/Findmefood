@@ -31,7 +31,7 @@ pytz==2014.10
 requests==2.9.1
 scipy==0.18.1
 six==1.10.0
-urllib3==1.13.1
+urllib3==1.26.5
 virtualenv==15.0.1
 web.py==0.38
 yelp==1.0.2
